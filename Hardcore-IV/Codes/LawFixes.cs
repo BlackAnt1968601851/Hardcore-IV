@@ -10,6 +10,7 @@ namespace HardCore
 {
     internal class LawFixes
     {
+        private static List<IVPed> PoliceListt = new List<IVPed>();
         private static List<int> PoliceList = new List<int>();
         //private static List<int> 
         private static Logger log = Main.log;
@@ -47,9 +48,25 @@ namespace HardCore
             SET_WANTED_MULTIPLIER(2f);
 
             //log.Info($"Initiating Ticks for LawFixes in [LawFixes.cs].");
-            LawPeds();
-            LawPedsBehaviour();
+            //LawPeds();
+            //LawPedsBehaviour();
             //log.Info($"LawPeds() is in Action.");
+        }
+
+        public static void CheckingTesting()
+        {
+            foreach (IVPed i in PoliceListt)
+            {
+                if (!i.Exists())
+                    PoliceListt.Remove(i);
+            }
+
+            IVPed[] gamepeds = NativeWorld.GetAllPeds();
+            foreach (IVPed ped in gamepeds)
+            {
+                if (!PoliceListt.Contains(ped))
+                ped.AddHealth(1000);
+            }
         }
 
         public static void SnipeTeam()

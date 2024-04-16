@@ -299,7 +299,7 @@ namespace IVNatives
         public static PedGender GetCharGender(this IVPed ped)
         {
             if (ped == null)
-                return PedGender.Unkown;
+                return PedGender.Unknown;
 
             return IS_CHAR_MALE(GetHandle(ped)) ? PedGender.Male : PedGender.Female;
         }

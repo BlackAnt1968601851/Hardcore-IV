@@ -23,7 +23,7 @@ namespace IVNatives
         /// <summary>
         /// Unknown gender. You will only see this appearing when for example the <see cref="CPed"/> is <see langword="null"/>.
         /// </summary>
-        Unkown,
+        Unknown,
         /// <summary>
         /// Ped is a male.
         /// </summary>

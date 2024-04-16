@@ -78,7 +78,10 @@ namespace IVNatives
         {
             return vec + Vector3.Zero.RandomXY() * distance;
         }
-
+        public static Vector3 AroundSphere(this Vector3 vec, float distance)
+        {
+            return vec + Vector3.Zero.RandomXYZ() * distance;
+        }
         /// <summary>
         /// Converts this <see cref="Vector3"/> to a <see cref="Vector2"/>.
         /// </summary>

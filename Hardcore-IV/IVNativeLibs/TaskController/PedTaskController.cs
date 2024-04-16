@@ -63,21 +63,21 @@ namespace IVNatives.TaskController
             CLEAR_CHAR_SECONDARY_TASK(handle);
         }
 
-        public void AimAt(Vector3 target, uint duration)
+        public void AimAt(Vector3 target, int duration)
         {
             if (ped == null)
                 return;
 
-            _TASK_AIM_GUN_AT_COORD(handle, target.X, target.Y, target.Z, duration);
+            _TASK_AIM_GUN_AT_COORD(handle, target.X, target.Y, target.Z, (uint)duration);
         }
-        public void AimAt(IVPed target, uint duration)
+        public void AimAt(IVPed target, int duration)
         {
             if (ped == null)
                 return;
             if (target == null)
                 return;
 
-            _TASK_AIM_GUN_AT_CHAR(handle, target.GetHandle(), duration);
+            _TASK_AIM_GUN_AT_CHAR(handle, target.GetHandle(), (uint)duration);
         }
         public void CruiseWithVehicle(IVVehicle veh, float speedMph, bool obeyTrafficLaws)
         {
@@ -160,7 +160,7 @@ namespace IVNatives.TaskController
 
             _TASK_ENTER_CAR_AS_PASSENGER(handle, 0, 0, 2);
         }
-        public void EnterVehicle(IVVehicle veh, uint seat)
+        public void EnterVehicle(IVVehicle veh, int seat)
         {
             if (ped == null)
                 return;
@@ -170,16 +170,16 @@ namespace IVNatives.TaskController
             if (seat == 0)
                 _TASK_ENTER_CAR_AS_DRIVER(handle, veh.GetHandle(), 0);
             else
-                _TASK_ENTER_CAR_AS_PASSENGER(handle, veh.GetHandle(), 0, seat);
+                _TASK_ENTER_CAR_AS_PASSENGER(handle, veh.GetHandle(), 0, (uint)seat);
         }
-        public void FightAgainst(IVPed target, uint duration)
+        public void FightAgainst(IVPed target, int duration)
         {
             if (ped == null)
                 return;
             if (target == null)
                 return;
 
-            _TASK_COMBAT_TIMED(handle, target.GetHandle(), duration);
+            _TASK_COMBAT_TIMED(handle, target.GetHandle(), (uint)duration);
         }
         public void FightAgainst(IVPed target)
         {
@@ -190,12 +190,12 @@ namespace IVNatives.TaskController
 
             _TASK_COMBAT(handle, target.GetHandle());
         }
-        public void FightAgainstHatedTargets(float radius, uint duration)
+        public void FightAgainstHatedTargets(float radius, int duration)
         {
             if (ped == null)
                 return;
 
-            _TASK_COMBAT_HATED_TARGETS_AROUND_CHAR_TIMED(handle, radius, duration);
+            _TASK_COMBAT_HATED_TARGETS_AROUND_CHAR_TIMED(handle, radius, (uint)duration);
         }
         public void FightAgainstHatedTargets(float radius)
         {
@@ -204,7 +204,7 @@ namespace IVNatives.TaskController
 
             _TASK_COMBAT_HATED_TARGETS_AROUND_CHAR(handle, radius);
         }
-        public void FleeFromChar(IVPed target, bool onPavements, uint duration)
+        public void FleeFromChar(IVPed target, bool onPavements, int duration)
         {
             if (ped == null)
                 return;
@@ -212,9 +212,9 @@ namespace IVNatives.TaskController
                 return;
 
             if (onPavements)
-                _TASK_SMART_FLEE_CHAR_PREFERRING_PAVEMENTS(handle, target.GetHandle(), 100f, duration);
+                _TASK_SMART_FLEE_CHAR_PREFERRING_PAVEMENTS(handle, target.GetHandle(), 100f, (uint)duration);
             else
-                _TASK_SMART_FLEE_CHAR(handle, target.GetHandle(), 100f, duration);
+                _TASK_SMART_FLEE_CHAR(handle, target.GetHandle(), 100f, (uint)duration);
         }
         public void FleeFromChar(IVPed target, bool onPavements)
         {
@@ -230,14 +230,14 @@ namespace IVNatives.TaskController
 
             FleeFromChar(target, false, MAX_DURATION);
         }
-        public void GoTo(IVPed target, float offsetRight, float offsetFront, uint duration)
+        public void GoTo(IVPed target, float offsetRight, float offsetFront, int duration)
         {
             if (ped == null)
                 return;
             if (target == null)
                 return;
 
-            _TASK_GOTO_CHAR_OFFSET(handle, target.GetHandle(), duration, offsetRight, offsetFront);
+            _TASK_GOTO_CHAR_OFFSET(handle, target.GetHandle(), (uint)duration, offsetRight, offsetFront);
         }
         public void GoTo(IVPed target, float offsetRight, float offsetFront)
         {
@@ -281,12 +281,12 @@ namespace IVNatives.TaskController
 
             _TASK_GUARD_CURRENT_POSITION(handle, 15f, 10f, 1);
         }
-        public void HandsUp(uint duration)
+        public void HandsUp(int duration)
         {
             if (ped == null)
                 return;
 
-            _TASK_HANDS_UP(handle, duration);
+            _TASK_HANDS_UP(handle, (uint)duration);
         }
         public void LandHelicopter(IVVehicle veh, Vector3 pos)
         {
@@ -294,6 +294,35 @@ namespace IVNatives.TaskController
                 return;
 
             _TASK_HELI_MISSION(handle, veh.GetHandle(), 0, 0, pos.X, pos.Y, pos.Z, 5, 0f, 0, -1f, 0, 0);
+        }
+
+        /// <summary>
+        /// This function makes Helicopter Pilot to do specific tasks like Landing, Chasing, Following, Fleeing and other stuffs.
+        /// This takes Different values. 
+        /// When you use TargetPed, then the position, and TargetPosition needs to be set 0, 
+        /// if using TargetVehicle then other 2 Parameters are set 0. That is how this works.
+        /// </summary>
+        /// <param name="veh"></param>
+        /// <param name="targetveh"></param>
+        /// <param name="targetped"></param>
+        /// <param name="pos"></param>
+        /// <param name="missionflag"></param>
+        /// <param name="speed"></param>
+        /// <param name="radius"></param>
+        /// <param name="heading"></param>
+        /// <param name="heightmax"></param>
+        /// <param name="heightmin"></param>
+        public void TaskHeliMission(IVVehicle veh, IVVehicle targetveh, IVPed targetped, Vector3 pos, int missionflag, int speed, int radius, float heading, int heightmax, int heightmin)
+        {
+            if (ped == null)
+                return;
+            
+            _TASK_HELI_MISSION(handle, veh.GetHandle(), (uint)targetveh.GetHandle(), (uint)targetped.GetHandle(), pos.X, pos.Y, pos.Z, (uint)missionflag, (uint)speed, (uint)radius, heading, (uint)heightmax, (uint)heightmin);
+        }
+        public void TaskVehicleMission(IVVehicle veh, IVVehicle targetveh, int missionflags, float speed, int drivingstyle, int distancestop, int param )
+        {
+            if (ped == null) return;
+            _TASK_CAR_MISSION(handle, veh.GetHandle(), (uint)targetveh.GetHandle(), (uint)missionflags, speed, (uint)drivingstyle, (uint)distancestop, (uint)param);
         }
         public void LeaveVehicle(IVVehicle veh, bool closeDoor)
         {
@@ -323,39 +352,39 @@ namespace IVNatives.TaskController
 
             _TASK_LEAVE_CAR_IMMEDIATELY(handle, veh.GetHandle());
         }
-        public void LookAt(Vector3 target, uint duration)
+        public void LookAt(Vector3 target, int duration)
         {
             if (ped == null)
                 return;
 
-            _TASK_LOOK_AT_COORD(handle, target.X, target.Y, target.Z, duration, 0);
+            _TASK_LOOK_AT_COORD(handle, target.X, target.Y, target.Z, (uint)duration, 0);
         }
-        public void LookAt(IVObject target, uint duration)
+        public void LookAt(IVObject target, int duration)
         {
             if (ped == null)
                 return;
             if (target == null)
                 return;
 
-            _TASK_LOOK_AT_OBJECT(handle, target.GetHandle(), duration, 0);
+            _TASK_LOOK_AT_OBJECT(handle, target.GetHandle(), (uint)duration, 0);
         }
-        public void LookAt(IVVehicle target, uint duration)
+        public void LookAt(IVVehicle target, int duration)
         {
             if (ped == null)
                 return;
             if (target == null)
                 return;
 
-            _TASK_LOOK_AT_VEHICLE(handle, target.GetHandle(), duration, 0);
+            _TASK_LOOK_AT_VEHICLE(handle, target.GetHandle(), (uint)duration, 0);
         }
-        public void LookAt(IVPed target, uint duration)
+        public void LookAt(IVPed target, int duration)
         {
             if (ped == null)
                 return;
             if (target == null)
                 return;
 
-            _TASK_LOOK_AT_CHAR(handle, target.GetHandle(), duration, 0);
+            _TASK_LOOK_AT_CHAR(handle, target.GetHandle(), (uint)duration, 0);
         }
         public void PlayAnimation(string animSet, string animName, float speed, int unknown, AnimationFlags flags)
         {
@@ -405,6 +434,7 @@ namespace IVNatives.TaskController
 
             _TASK_SHOOT_AT_CHAR(handle, target.GetHandle(), duration, (int)mode);
         }
+
         public void ShootAt(IVPed target, ShootMode mode)
         {
             if (ped == null)
@@ -463,19 +493,19 @@ namespace IVNatives.TaskController
 
             _TASK_USE_MOBILE_PHONE(handle, true);
         }
-        public void UseMobilePhone(uint duration)
+        public void UseMobilePhone(int duration)
         {
             if (ped == null)
                 return;
 
-            _TASK_USE_MOBILE_PHONE_TIMED(handle, duration);
+            _TASK_USE_MOBILE_PHONE_TIMED(handle, (uint)duration);
         }
-        public void Wait(uint duration)
+        public void Wait(int duration)
         {
             if (ped == null)
                 return;
 
-            _TASK_PAUSE(handle, duration);
+            _TASK_PAUSE(handle, (uint)duration);
         }
         public void WanderAround()
         {
@@ -484,7 +514,7 @@ namespace IVNatives.TaskController
 
             _TASK_WANDER_STANDARD(handle);
         }
-        public void WarpIntoVehicle(IVVehicle veh, uint seat)
+        public void WarpIntoVehicle(IVVehicle veh, int seat)
         {
             if (ped == null)
                 return;
@@ -494,7 +524,7 @@ namespace IVNatives.TaskController
             if (seat == 0)
                 _TASK_WARP_CHAR_INTO_CAR_AS_DRIVER(handle, veh.GetHandle());
             else
-                _TASK_WARP_CHAR_INTO_CAR_AS_PASSENGER(handle, veh.GetHandle(), seat);
+                _TASK_WARP_CHAR_INTO_CAR_AS_PASSENGER(handle, veh.GetHandle(), (uint)seat);
         }
 
         public void PerformSequence(NativeTaskSequence sequence)

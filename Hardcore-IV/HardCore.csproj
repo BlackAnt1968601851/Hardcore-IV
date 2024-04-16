@@ -13,7 +13,7 @@
   <PropertyGroup />
   <ItemGroup>
     <Reference Include="IVSDKDotNetWrapper">
-      <HintPath>..\..\..\..\..\IVSDKDotNetWrapper.dll</HintPath>
+      <HintPath>..\..\Games\GTA_IV\GTAIV\IVSDKDotNetWrapper.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

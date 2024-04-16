@@ -89,7 +89,7 @@ namespace IVNatives
             {
                 if (!IsValid)
                     return 0;
-
+                
                 GET_ROOM_KEY_FROM_PICKUP(Handle, out uint hash);
                 return hash;
             }

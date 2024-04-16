@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 using IVSDKDotNet;
@@ -765,6 +766,39 @@ namespace IVNatives
         {
             GET_GAME_VIEWPORT_ID(out int viewportId);
             return CAM_IS_SPHERE_VISIBLE(viewportId, pos, radius);
+        }
+
+        public static IVPed[] GetAllPeds()
+        {
+            //Letting the same as SHDN
+            //Memory Access- grabbing total spawned peds.
+            IVPool PedPool = IVPools.GetPedPool();
+            //List to store them
+            List<IVPed> PedList = new List<IVPed>();
+            //Loop we do so that we can get total amount of peds spawned and their count
+            for (int i = 0; i < PedPool.Count; i++)
+            {
+                //game ptr value check
+                UIntPtr ptr = PedPool.Get(i);
+                if (ptr != UIntPtr.Zero)
+                {
+                    //getting handle from pool ptr
+                    int pedHandle = (int)PedPool.GetIndex(ptr);
+                    //changing the handle (uint) to IVPed
+                    IVPed getped = GetPedInstaceFromHandle(pedHandle);
+                    if (DOES_CHAR_EXIST(IVPedExtensions.GetHandle(getped)))
+                    {
+                        GET_CHAR_MODEL(IVPedExtensions.GetHandle(getped), out int model);
+                        if (model != 0)
+                        {
+                            //adding those IVPed Values.
+                            PedList.Add(getped);
+                        }
+                    }
+                }
+            }
+            //return them as array for useful work.
+            return PedList.ToArray();
         }
         #endregion
 
