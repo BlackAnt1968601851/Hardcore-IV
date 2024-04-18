@@ -1,4 +1,5 @@
 ﻿using IVSDKDotNet;
+using System;
 using static IVSDKDotNet.Native.Natives;
 
 namespace IVNatives
@@ -53,6 +54,10 @@ namespace IVNatives
 
             ADD_SCORE(info.PlayerId, -1 * amount);
         }
+        public static void SetWantedLevel(this IVPlayerInfo info, int level)
+        {
+            ALTER_WANTED_LEVEL(info.PlayerId, (uint)level);
+        }
         #endregion
 
         #region Functions
@@ -61,14 +66,30 @@ namespace IVNatives
         /// </summary>
         /// <param name="info"></param>
         /// <returns>The amount of money the player has.</returns>
-        public static uint GetMoney(this IVPlayerInfo info)
+        public static int GetMoney(this IVPlayerInfo info)
         {
             if (info == null)
                 return 0;
 
             STORE_SCORE(info.PlayerId, out uint money);
-            return money;
+            return (int)money;
         }
+        
+        public static IVPed Character(this IVPlayerInfo info)
+        {
+            if (info == null)
+                return null;
+            
+            return IVPed.FromUIntPtr(IVPlayerInfo.FindThePlayerPed());
+        }
+
+        public static int GetWantedLevel(this IVPlayerInfo info)
+        {
+             STORE_WANTED_LEVEL(info.PlayerId, out uint level);
+            return (int)level;
+        }
+       
+
         #endregion
     }
 }

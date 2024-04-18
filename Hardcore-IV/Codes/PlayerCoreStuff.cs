@@ -24,7 +24,6 @@ namespace HardCore.Codes
             {
                 IVPed playerPed = IVPed.FromUIntPtr(IVPlayerInfo.FindThePlayerPed());
                 var plyped = playerPed.GetHandle();
-                playerId = IVPedExtensions.GetHandle(playerPed);
 
                 /*GET_PLAYER_MAX_HEALTH(playerId, out int maxhl);
                 if (maxhl > 150)

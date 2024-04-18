@@ -1,0 +1,13 @@
+E:\Hardcore-IV\Hardcore-IV\bin\Debug\net48\HardCore.ivsdk.dll
+E:\Hardcore-IV\Hardcore-IV\bin\Debug\net48\HardCore.ivsdk.pdb
+E:\Hardcore-IV\Hardcore-IV\bin\Debug\net48\IVSDKDotNetWrapper.dll
+E:\Hardcore-IV\Hardcore-IV\bin\Debug\net48\IVSDKDotNetWrapper.xml
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.csproj.AssemblyReference.cache
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.IVNativeLibs.Properties.Resources.resources
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.csproj.GenerateResource.cache
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.GeneratedMSBuildEditorConfig.editorconfig
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.csproj.CoreCompileInputs.cache
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.sourcelink.json
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.csproj.Up2Date
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.ivsdk.dll
+E:\Hardcore-IV\Hardcore-IV\obj\Debug\net48\HardCore.ivsdk.pdb

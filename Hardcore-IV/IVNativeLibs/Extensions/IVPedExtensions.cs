@@ -43,6 +43,14 @@ namespace IVNatives
             ADD_ARMOUR_TO_CHAR(GetHandle(ped), amount);
         }
 
+        public static void CanDoDrivebys(this IVPed ped, bool allowdriveby)
+        {
+            if (allowdriveby)
+                SET_CHAR_WILL_DO_DRIVEBYS(ped.GetHandle(), true);
+            else
+                SET_CHAR_WILL_DO_DRIVEBYS(ped.GetHandle(), false);
+        }
+
         /// <summary>
         /// Sets if this <see cref="IVPed"/> can ragdoll.
         /// </summary>

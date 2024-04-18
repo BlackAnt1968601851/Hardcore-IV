@@ -10,7 +10,7 @@ namespace HardCore
 {
     internal class LawFixes
     {
-        private static List<IVPed> PoliceListt = new List<IVPed>();
+        //private static List<IVPed> PoliceListt = new List<IVPed>();
         private static List<int> PoliceList = new List<int>();
         //private static List<int> 
         private static Logger log = Main.log;
@@ -48,168 +48,79 @@ namespace HardCore
             SET_WANTED_MULTIPLIER(2f);
 
             //log.Info($"Initiating Ticks for LawFixes in [LawFixes.cs].");
-            //LawPeds();
-            //LawPedsBehaviour();
+            LawPeds();
+            LawPedsBehaviour();
             //log.Info($"LawPeds() is in Action.");
-        }
-
-        public static void CheckingTesting()
-        {
-            foreach (IVPed i in PoliceListt)
-            {
-                if (!i.Exists())
-                    PoliceListt.Remove(i);
-            }
-
-            IVPed[] gamepeds = NativeWorld.GetAllPeds();
-            foreach (IVPed ped in gamepeds)
-            {
-                if (!PoliceListt.Contains(ped))
-                ped.AddHealth(1000);
-            }
-        }
-
-        public static void SnipeTeam()
-        {
-            //probably #2 idea stuff-
-
-        }
-
-        public static void Guarding()
-        {
-            //may be make police and sniper team to guard the govt properties and the early game bridges?? #3 idea stuff?
         }
 
         public static string[] ArmouredPedsList = { "m_y_swat", "m_m_armoured" };
         //this is uint way aka the same shit as shdn does for Ped.GetAllPeds(). but idk if it works ****
-        public static uint[] GetAllPedFromPools()
-        {
-            //Letting the same as SHDN
-            //Memory Access
-            IVPool PedPool = IVPools.GetPedPool();
-            //List
-            List<uint> PedList = new List<uint>();
-            //Loop
-            for (int i = 0; i < PedPool.Count; i++)
-            {
-                UIntPtr ptr = PedPool.Get(i);
-                if (ptr != UIntPtr.Zero)
-                {
-                    PedList.Add(PedPool.GetIndex(ptr));
-                }
-            }
-            return PedList.ToArray();
-        }
-
-        //this is uint way aka the same shit as shdn does for Ped.GetAllPeds(). but idk if it works ****
-        public static uint[] GetAllPedFromPools_Models()
-        {
-            //Letting the same as SHDN
-            //Memory Access
-            IVPool PedPool = IVPools.GetPedPool();
-            //List
-            List<uint> PedList = new List<uint>();
-            //Loop
-            for (int i = 0; i < PedPool.Count; i++)
-            {
-                UIntPtr ptr = PedPool.Get(i);
-                if (ptr != UIntPtr.Zero)
-                {
-                    int pedHandle = (int)PedPool.GetIndex(ptr);
-                    if (DOES_CHAR_EXIST(pedHandle))
-                    {
-                        GET_CHAR_MODEL(pedHandle, out int model);
-                        if (model != 0)
-                        {
-                            PedList.Add((uint)pedHandle);
-                        }
-                    }
-                }
-            }
-            return PedList.ToArray();
-        }
-
+       
         //Makes NOoSE, Armoured security, harder to Deal with.
         //#1 idea i think so...
         public static void LawPedsBehaviour()
         {
-            IVPool pedPool = IVPools.GetPedPool();
-            for (int i = 0; i < pedPool.Count; i++)
+            IVPed[] peds = NativeWorld.GetAllPeds();
+            foreach (IVPed ped in peds)
             {
-                UIntPtr ptr = pedPool.Get(i);
+                // Ignore player ped
+                IVPlayerInfo ply = IVPlayerInfo.FromUIntPtr(IVPlayerInfo.FindThePlayerPed());
 
-                if (ptr != UIntPtr.Zero)
+                if (ped == ply.Character())
+                    continue;
+
+                IVVehicle[] vehPool = NativeWorld.GetAllVehicles();
+                foreach (IVVehicle veh in vehPool)
                 {
-                    // Ignore player ped
-                    if (ptr == IVPlayerInfo.FindThePlayerPed())
-                        continue;
+                    int wl = ply.GetWantedLevel();
+                    //if not less than 2 then we force the game to not make peds drive by....
+                    if (wl! < 2)
+                        ped.CanDoDrivebys(false);
+                    //if greater than 2 then boom blast aiugwhaiguawgh87ewrg
+                    else
+                        ped.CanDoDrivebys(true);
 
-                    int playerID = CONVERT_INT_TO_PLAYERINDEX(GET_PLAYER_ID());
-                    GET_PLAYER_CHAR(playerID, out int playerPed);
-
-                    int pedHandle = (int)pedPool.GetIndex(ptr);
-
-                    IVPool vehPool = IVPools.GetVehiclePool();
-                    for (int j = 0; j < vehPool.Count; j++)
+                    if (ped.ModelIndex == RAGE.AtStringHash(ArmouredPedsList[0]) || ped.ModelIndex == RAGE.AtStringHash(ArmouredPedsList[1]))
                     {
-                        UIntPtr ptr2 = vehPool.Get(j);
-                        if (ptr2 != UIntPtr.Zero)
+                        GET_CHAR_ARMOUR(ped.GetHandle(), out uint PedArmor);
+                        IVPed ArmedPed = NativeWorld.GetPedInstaceFromHandle(ped.GetHandle());
+
+                        // Getting the index of the pedestrian's prop (if any)
+                        GET_CHAR_PROP_INDEX(ped.GetHandle(), 0, out int pedPropIndex);
+
+                        // Checking if the pedestrian is dead or alive
+                        if (!IS_CHAR_DEAD(ped.GetHandle()))
                         {
-                            int vehhandle = (int)vehPool.GetIndex(ptr2);
-
-                            STORE_WANTED_LEVEL(playerID, out uint wl);
-                            GET_CHAR_MODEL(pedHandle, out uint pedModel);
-
-                            //if not less than 2 then we force the game to not make peds drive by....
-                            if(wl!<2)
-                                SET_CHAR_WILL_DO_DRIVEBYS(pedHandle, false);
-                            //if greater than 2 then boom blast aiugwhaiguawgh87ewrg
-                            else 
-                                SET_CHAR_WILL_DO_DRIVEBYS(pedHandle, true);
-
-                            if (pedModel == RAGE.AtStringHash(ArmouredPedsList[0]) || pedModel == RAGE.AtStringHash(ArmouredPedsList[1]))
+                            if (PedArmor > 0)
                             {
-                                GET_CHAR_ARMOUR(pedHandle, out uint PedArmor);
-                                IVPed ArmedPed = NativeWorld.GetPedInstaceFromHandle(pedHandle);
+                                // Preventing headshots and disabling ragdoll
+                                ArmedPed.PedFlags.NoHeadshots = true;
+                                ArmedPed.PreventRagdoll(true);
 
-                                // Getting the index of the pedestrian's prop (if any)
-                                GET_CHAR_PROP_INDEX(pedHandle, 0, out int pedPropIndex);
-
-                                // Checking if the pedestrian is dead or alive
-                                if (!IS_CHAR_DEAD(pedHandle))
+                                // If the pedestrian has no prop
+                                if (pedPropIndex == -1)
                                 {
-                                    if (PedArmor > 0)
-                                    {
-                                        // Preventing headshots and disabling ragdoll
-                                        ArmedPed.PedFlags.NoHeadshots = true;
-                                        ArmedPed.PreventRagdoll(true);
+                                    // Allowing headshots
+                                    ArmedPed.PedFlags.NoHeadshots = false;
+                                }
+                                //wanted to add another check related to ped in melee combat with other ped. but seems like shit is tough
+                                if (IS_CHAR_TOUCHING_VEHICLE(ped.GetHandle(), veh.GetHandle()) || IS_CHAR_ON_FIRE(ped.GetHandle()))
+                                {
+                                    ArmedPed.PreventRagdoll(false);
+                                }
+                            }
+                            // If armor is 0
+                            else if (PedArmor == 0)
+                            {
+                                // Preventing headshots and enabling ragdoll
+                                ArmedPed.PedFlags.NoHeadshots = true;
+                                ArmedPed.PreventRagdoll(false);
 
-                                        // If the pedestrian has no prop
-                                        if (pedPropIndex == -1)
-                                        {
-                                            // Allowing headshots
-                                            ArmedPed.PedFlags.NoHeadshots = false;
-                                        }
-                                        //wanted to add another check related to ped in melee combat with other ped. but seems like shit is tough
-                                        if (IS_CHAR_TOUCHING_VEHICLE(pedHandle, vehhandle)|| IS_CHAR_ON_FIRE(pedHandle))
-                                        {
-                                            ArmedPed.PreventRagdoll(false);
-                                        }
-                                    }
-                                    // If armor is 0
-                                    else if (PedArmor == 0)
-                                    {
-                                        // Preventing headshots and enabling ragdoll
-                                        ArmedPed.PedFlags.NoHeadshots = true;
-                                        ArmedPed.PreventRagdoll(false);
-
-                                        // If the pedestrian has no prop
-                                        if (pedPropIndex == -1)
-                                        {
-                                            // Allowing headshots
-                                            ArmedPed.PedFlags.NoHeadshots = false;
-                                        }
-                                    }
+                                // If the pedestrian has no prop
+                                if (pedPropIndex == -1)
+                                {
+                                    // Allowing headshots
+                                    ArmedPed.PedFlags.NoHeadshots = false;
                                 }
                             }
                         }
