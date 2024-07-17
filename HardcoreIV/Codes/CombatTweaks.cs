@@ -27,21 +27,21 @@ namespace HardCore
 
         private static void AutoRemoveFromList()
         {
-            for (int i =0;i<PoliceList.Count;i++)
+            for (int i = 0; i < PoliceList.Count; i++)
             {
                 if (!DOES_CHAR_EXIST(PoliceList[i].GetHandle()) || IS_CHAR_DEAD(PoliceList[i].GetHandle()))
                 {
-                    PoliceList.RemoveAt(i);    
+                    PoliceList.RemoveAt(i);
+                    i--; // Adjust index after removal
                 }
             }
         }
 
-       
-
         public static void Tick()
         {
             LawPeds();
-            //LawPedsBehaviour();
+            LawPedsBehaviour();
+            AutoRemoveFromList();
         }
 
         public static string[] ArmouredPedsList = { "m_m_armoured" };
@@ -49,83 +49,46 @@ namespace HardCore
 
         public static void LawPedsBehaviour()
         {
-            IVPed[] peds = Helpers.GetAllPeds();
+            IVPed[] peds = Helpers.GetAllPeds(SwatAndFbiPedsList);
             foreach (IVPed ped in peds)
             {
-                // Check if ped is SWAT or armored guard
-                if (ped.ModelIndex == RAGE.AtStringHash(ArmouredPedsList[0]) || ped.ModelIndex == RAGE.AtStringHash(ArmouredPedsList[1]))
+                GET_CHAR_PROP_INDEX(ped.GetHandle(), 0, out int pedPropIndex);
+
+                if (!IS_CHAR_DEAD(ped.GetHandle()))
                 {
-                    // Apply buffs specific to SWAT and armored guards
-                    SET_CHAR_WILL_DO_DRIVEBYS(ped.GetHandle(), true);
-                    IVPed ArmedPed = ped;
-
-                    // Getting the index of the pedestrian's prop (if any)
-                    GET_CHAR_PROP_INDEX(ped.GetHandle(), 0, out int pedPropIndex);
-
-                    // Checking if the pedestrian is dead or alive
-                    if (!IS_CHAR_DEAD(ped.GetHandle()))
+                    if (pedPropIndex == -1)
                     {
-                        ArmedPed.PedFlags.NoHeadshots = true;
-                        if (pedPropIndex == -1)
-                        {
-                            // Allowing headshots if no prop (helmet) is worn
-                            ArmedPed.PedFlags.NoHeadshots = false;
-                        }
+                        ped.PedFlags.NoHeadshots = false;
                     }
-                }
-                else
-                {
-                    // Optionally handle other peds if needed
+                    else
+                    {
+                        ped.PedFlags.NoHeadshots = true;
+                    }
                 }
             }
         }
 
         public static void LawPeds()
         {
-            AutoRemoveFromList();
-
             IVPed[] peds = Helpers.GetAllPeds();
             foreach (IVPed ped in peds)
             {
                 if (ped != Helpers.GamePlayerPed && !IS_CHAR_DEAD(ped.GetHandle()))
                 {
-                    SET_CHAR_ACCURACY(ped.GetHandle(), 100);
-                    SET_CHAR_SHOOT_RATE(ped.GetHandle(), 300);
-                    SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped.GetHandle(), true);
-                    SET_PED_PATH_WILL_AVOID_DYNAMIC_OBJECTS(ped.GetHandle(), true);
-                    SET_HOT_WEAPON_SWAP(true);
-                    SET_PED_PATH_MAY_USE_CLIMBOVERS(ped.GetHandle(), true);
-                    SET_PED_PATH_MAY_USE_LADDERS(ped.GetHandle(), true);
-                    SET_PED_DENSITY_MULTIPLIER(2.0f);
-
-                    if (Array.Exists(ArmouredPedsList, model => ped.ModelIndex == RAGE.AtStringHash(model)))
+                    if (ped.GetCharModel() == RAGE.AtStringHash(ArmouredPedsList[0]) ||
+                        ped.GetCharModel() == RAGE.AtStringHash(SwatAndFbiPedsList[0]) ||
+                        ped.GetCharModel() == RAGE.AtStringHash(SwatAndFbiPedsList[1]))
                     {
                         if (!PoliceList.Contains(ped))
                         {
-                            BuffArmouredPed(ped);
-                        }
-                    }
-                    else if (Array.Exists(SwatAndFbiPedsList, model => ped.ModelIndex == RAGE.AtStringHash(model)))
-                    {
-                        if (!PoliceList.Contains(ped))
-                        {
-                            BuffSwatAndFbiPed(ped);
-                        }
-                    }
-                    else if (!Array.Exists(SwatAndFbiPedsList, model => ped.ModelIndex == RAGE.AtStringHash(model)) && !Array.Exists(ArmouredPedsList, model => ped.ModelIndex == RAGE.AtStringHash(model)))
-                    {
-                        if (!PoliceList.Contains(ped))
-                        {
-                            SET_CHAR_MAX_HEALTH(ped.GetHandle(), 200);
-                            SET_CHAR_HEALTH(ped.GetHandle(), 200);
-                            PoliceList.Add(ped);
+                            BuffPed(ped);
                         }
                     }
                 }
             }
         }
 
-        private static void BuffArmouredPed(IVPed ped)
+        private static void BuffPed(IVPed ped)
         {
             ADD_ARMOUR_TO_CHAR(ped.GetHandle(), 200);
             SET_CHAR_MAX_HEALTH(ped.GetHandle(), 200);
@@ -133,7 +96,7 @@ namespace HardCore
 
             int primaryWeapon = Main.GenerateRandomNumber(0, 3); // Random number between 0 and 2
             int secondaryWeapon = Main.GenerateRandomNumber(0, 2); // Random number between 0 and 1
-
+            
             REMOVE_ALL_CHAR_WEAPONS(ped.GetHandle());
 
             switch (primaryWeapon)
@@ -145,44 +108,14 @@ namespace HardCore
                     GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_M4, 300, true);
                     break;
                 case 2:
-                    GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_AK47, 300, true);
-                    break;
-            }
-
-            switch (secondaryWeapon)
-            {
-                case 0:
-                    GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_DEAGLE, 50, false);
-                    break;
-                case 1:
-                    GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_PISTOL, 50, false);
-                    break;
-            }
-
-            PoliceList.Add(ped);
-        }
-
-        private static void BuffSwatAndFbiPed(IVPed ped)
-        {
-            ADD_ARMOUR_TO_CHAR(ped.GetHandle(), 200);
-            SET_CHAR_MAX_HEALTH(ped.GetHandle(), 200);
-            SET_CHAR_HEALTH(ped.GetHandle(), 200);
-
-            int primaryWeapon = Main.GenerateRandomNumber(0, 3); // Random number between 0 and 2
-            int secondaryWeapon = Main.GenerateRandomNumber(0, 2); // Random number between 0 and 1
-
-            REMOVE_ALL_CHAR_WEAPONS(ped.GetHandle());
-
-            switch (primaryWeapon)
-            {
-                case 0:
-                    GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_M4, 300, true);
-                    break;
-                case 1:
-                    GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_MP5, 300, true);
-                    break;
-                case 2:
-                    GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_SHOTGUN, 150, true);
+                    if (ped.GetCharModel() == RAGE.AtStringHash(SwatAndFbiPedsList[0]) || ped.GetCharModel() == RAGE.AtStringHash(SwatAndFbiPedsList[1]))
+                    {
+                        GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_SHOTGUN, 150, true);
+                    }
+                    else
+                    {
+                        GIVE_WEAPON_TO_CHAR(ped.GetHandle(), (int)eWeaponType.WEAPON_AK47, 300, true);
+                    }
                     break;
             }
 

@@ -97,9 +97,9 @@ namespace HardCore
         private void UnlockIslands()
         {
             var stat= GET_INT_STAT((uint)eIntStatistic.STAT_ISLANDS_UNLOCKED);
-            log.Info($"STAT_ISLAND_UNLOCKED = {stat}");
+            //log.Info($"STAT_ISLAND_UNLOCKED = {stat}");
             if (stat <= 2)
-                SET_INT_STAT((uint)eIntStatistic.STAT_ISLANDS_UNLOCKED, 4);
+                SET_INT_STAT((uint)eIntStatistic.STAT_ISLANDS_UNLOCKED, 3);
         }
 
         public static Random rnd = new Random();
@@ -119,12 +119,27 @@ namespace HardCore
             return array;
         }
 
+        public static Vector3 GetPositionOnStreet(Vector3 pos, out float heading, float radius = 5f)
+        {
+            heading = 0;
+            for (uint i = 1; i < 40; i++)
+            {
+                GET_NTH_CLOSEST_CAR_NODE_WITH_HEADING(pos, i, out Vector3 newPos, out var h);
+                if (!IS_POINT_OBSCURED_BY_A_MISSION_ENTITY(newPos, new Vector3(radius)))
+                    heading = h;
+                    return newPos;
+            }
+
+            return Vector3.Zero;
+        }
+
         private static void DispatchCops()
         {
             Vector3 pos = Helpers.GamePlayerPed.Matrix.Pos;
-            var pos2 = NativeWorld.GetPositionOnStreet(pos, 5);
-            var car = NativeWorld.SpawnVehicle("pstockade", pos.Around(70), out int handlecar, true, false);
+            var pos2 = GetPositionOnStreet(pos, out var heading, 10);
+            var car = NativeWorld.SpawnVehicle("pstockade", pos2.Around(70), out int handlecar, true, false);
             var ped = NativeWorld.SpawnPed("m_y_swat", pos.Around(90), out int pedhandle, true, false);
+            ped.GetTaskController().ShootAt(Helpers.GamePlayerPed, ShootMode.Burst);
             var ped2 = NativeWorld.SpawnPed("m_y_swat", pos.Around(90), out int pedhandle2, true, false);
             var ped3= NativeWorld.SpawnPed("m_y_swat", pos.Around(90), out int pedhandle3, true, false);
  var ped4= NativeWorld.SpawnPed("m_y_swat", pos.Around(90), out int pedhandle4, true, false);
@@ -135,11 +150,12 @@ namespace HardCore
             ped3.GetTaskController().WarpIntoVehicle(car, (uint)1);
             ped4.GetTaskController().WarpIntoVehicle(car, (uint)2);
 
-            Main.log.Debug("spawn success 4 swat at pos ");
+            Main.log.Debug($"spawn success 4 swat at pos {pos2}, {pos}");
             GIVE_WEAPON_TO_CHAR(ped3.GetHandle(), (int)eWeaponType.WEAPON_SNIPERRIFLE, 200, false);
             
             SET_CAR_COORDINATES(car.GetHandle(), pos2);
             car.PlaceOnGroundProperly();
+            car.SetHeading(heading);
             SET_CAR_FORWARD_SPEED(car.GetHandle(), 10);
             car.MarkAsNoLongerNeeded();
             ped.MarkAsNoLongerNeeded();

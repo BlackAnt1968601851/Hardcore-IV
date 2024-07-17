@@ -57,6 +57,11 @@ namespace HardCore.Codes
 
                     arrest = true;
                 }*/
+
+                if(IS_CHAR_DEAD(Helpers.GamePlayerPed.GetHandle()))
+                {
+                    REMOVE_ALL_CHAR_WEAPONS(Helpers.GamePlayerPed.GetHandle());
+                }
             }
             catch (Exception ex)
             {
