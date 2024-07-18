@@ -15,25 +15,13 @@ namespace HardCore.Codes
        public static IVPed GamePlayerPed => IVPed.FromUIntPtr(IVPlayerInfo.FindThePlayerPed());
         public static IVPlayerInfo GamePlayer => IVPlayerInfo.FromUIntPtr(IVPlayerInfo.FindThePlayerPed());
 
-        public static IVPed[] GetAllPeds(string[] modelNames = null)
+        public static IVPed[] GetAllPeds(int[] modelNames = null)
         {
-            // Convert model names to model hashes (uint) and then to int
-            int[] modelHashes = null;
-            if (modelNames != null && modelNames.Length > 0)
-            {
-                modelHashes = new int[modelNames.Length];
-                for (int i = 0; i < modelNames.Length; i++)
-                {
-                    uint hash = RAGE.AtStringHash(modelNames[i]);
-                    modelHashes[i] = (int)hash;
-                }
-            }
-
-            // Getting the total number of spawned peds
-            IVPool PedPool = IVPools.GetPedPool();
-
             // List to store the valid peds
             List<IVPed> PedList = new List<IVPed>();
+            var model = 0; var findmodel=0;
+            // Getting the total number of spawned peds
+            IVPool PedPool = IVPools.GetPedPool();
 
             // Loop through the ped pool to get all peds
             for (int i = 0; i < PedPool.Count; i++)
@@ -54,7 +42,7 @@ namespace HardCore.Codes
                         GET_CHAR_MODEL(getped.GetHandle(), out int model);
 
                         // Check if the model is valid and matches any of the specified model hashes
-                        if (model != 0 && (modelHashes == null || Array.Exists(modelHashes, hash => hash == model)))
+                        if (model != 0 && (findmodel == 0 || findmodel == model)))
                         {
                             // Add the ped to the list
                             PedList.Add(getped);
