@@ -1,0 +1,13 @@
+E:\Hardcore-IV\obj\Debug\net48\HardCore.csproj.AssemblyReference.cache
+E:\Hardcore-IV\obj\Debug\net48\HardCore.GeneratedMSBuildEditorConfig.editorconfig
+E:\Hardcore-IV\obj\Debug\net48\HardCore.csproj.CoreCompileInputs.cache
+E:\Hardcore-IV\obj\Debug\net48\HardCore.sourcelink.json
+E:\Hardcore-IV\bin\Debug\net48\HardCore.ivsdk.dll
+E:\Hardcore-IV\bin\Debug\net48\HardCore.ivsdk.pdb
+E:\Hardcore-IV\bin\Debug\net48\ClonksCodingLib.GTAIV.dll
+E:\Hardcore-IV\bin\Debug\net48\IVSDKDotNetWrapper.dll
+E:\Hardcore-IV\bin\Debug\net48\ClonksCodingLib.GTAIV.xml
+E:\Hardcore-IV\bin\Debug\net48\IVSDKDotNetWrapper.xml
+E:\Hardcore-IV\obj\Debug\net48\HardCore.csproj.Up2Date
+E:\Hardcore-IV\obj\Debug\net48\HardCore.ivsdk.dll
+E:\Hardcore-IV\obj\Debug\net48\HardCore.ivsdk.pdb

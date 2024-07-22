@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>HardCore.ivsdk</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>Preview</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="ClonksCodingLib.GTAIV">
+      <HintPath>..\Games\Grand Theft Auto IV\GTAIV\IVSDKDotNet\bin\ClonksCodingLib.GTAIV.dll</HintPath>
+    </Reference>
+    <Reference Include="IVSDKDotNetWrapper">
+      <HintPath>..\Games\Grand Theft Auto IV\GTAIV\IVSDKDotNetWrapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Hardcore-IV\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|e:\\hardcore-iv\\codes\\lawfixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\lawfixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\Hardcore-IV\\codes\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\Hardcore-IV\\codes\\playercorestuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\playercorestuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\Hardcore-IV\\codes\\somefixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\somefixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SomeFixes.cs",
+              "DocumentMoniker": "E:\\Hardcore-IV\\Codes\\SomeFixes.cs",
+              "RelativeDocumentMoniker": "Codes\\SomeFixes.cs",
+              "ToolTip": "E:\\Hardcore-IV\\Codes\\SomeFixes.cs",
+              "RelativeToolTip": "Codes\\SomeFixes.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwCMAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T16:39:32.359Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerCoreStuff.cs",
+              "DocumentMoniker": "E:\\Hardcore-IV\\Codes\\PlayerCoreStuff.cs",
+              "RelativeDocumentMoniker": "Codes\\PlayerCoreStuff.cs",
+              "ToolTip": "E:\\Hardcore-IV\\Codes\\PlayerCoreStuff.cs",
+              "RelativeToolTip": "Codes\\PlayerCoreStuff.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAqwAcAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T16:39:22.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Main.cs",
+              "DocumentMoniker": "E:\\Hardcore-IV\\Codes\\Main.cs",
+              "RelativeDocumentMoniker": "Codes\\Main.cs",
+              "ToolTip": "E:\\Hardcore-IV\\Codes\\Main.cs",
+              "RelativeToolTip": "Codes\\Main.cs",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAIwAcAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T16:38:58.767Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LawFixes.cs",
+              "DocumentMoniker": "E:\\Hardcore-IV\\Codes\\LawFixes.cs",
+              "RelativeDocumentMoniker": "Codes\\LawFixes.cs",
+              "ToolTip": "E:\\Hardcore-IV\\Codes\\LawFixes.cs",
+              "RelativeToolTip": "Codes\\LawFixes.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAiwDMAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T16:36:24.336Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
