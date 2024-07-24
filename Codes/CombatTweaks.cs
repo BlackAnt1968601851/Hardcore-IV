@@ -87,8 +87,8 @@ namespace HardCore
                     if (!IS_CHAR_DEAD(handle))
                     {
                         if (
-                            model == RAGE.AtStringHash(ArmouredPedsList[0]) ||
-                        model == RAGE.AtStringHash(SwatAndFbiPedsList[0]) //||
+                            model == RAGE.AtStringHash(ArmouredPedsList[0]) //||
+                       // model == RAGE.AtStringHash(SwatAndFbiPedsList[0]) //||
                         //model == RAGE.AtStringHash(SwatAndFbiPedsList[1])
                         )
                         {
@@ -148,34 +148,34 @@ namespace HardCore
                         model == RAGE.AtStringHash(SwatAndFbiPedsList[0]) ||
                         model == RAGE.AtStringHash(SwatAndFbiPedsList[1]))
                     {
-                        SET_PED_PATH_MAY_DROP_FROM_HEIGHT(ped, true);
-                        SET_PED_PATH_MAY_USE_CLIMBOVERS(ped, true);
-                        SET_PED_PATH_MAY_USE_LADDERS(ped, true);
-                        SET_PED_PATH_WILL_AVOID_DYNAMIC_OBJECTS(ped, true);
-                        SET_CHAR_WILL_DO_DRIVEBYS(ped, true);
-                        SET_CHAR_WEAPON_SKILL(ped, 5);
-                        SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped, true);
-                        SET_CHAR_ACCURACY(ped, 100);
-                        SET_CHAR_SHOOT_RATE(ped, 300);
-                        SET_CHAR_GRAVITY(ped, 2);
-                        SET_CHAR_SIGNAL_AFTER_KILL(ped, true);
+                        SET_PED_PATH_MAY_DROP_FROM_HEIGHT(ped, true); //jumping off the building or roof
+                        SET_PED_PATH_MAY_USE_CLIMBOVERS(ped, true); //parkour and jumping stuffs
+                        SET_PED_PATH_MAY_USE_LADDERS(ped, true); //ladder climbing
+                        SET_PED_PATH_WILL_AVOID_DYNAMIC_OBJECTS(ped, true); //avoid vehicles/peds or other things
+                        SET_CHAR_WILL_DO_DRIVEBYS(ped, true); //using weapons while driving (only passenger uses guns)
+                        SET_CHAR_WEAPON_SKILL(ped, 5); //idk about it but will see
+                        SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped, true); //prefer using cars to ram if inside vehicle
+                        SET_CHAR_ACCURACY(ped, 100); //accuracy
+                        SET_CHAR_SHOOT_RATE(ped, 300); //rate of fire
+                        SET_CHAR_GRAVITY(ped, 2); //hmm
+                        SET_CHAR_SIGNAL_AFTER_KILL(ped, true); //signal like swat does
                         NativeWorld.GetPedInstaceFromHandle(ped).GetTaskController().FightAgainstHatedTargets(100, 100000);
 
                         BuffPed(ped, model);
                     }
                     else
                     {
-                        SET_PED_PATH_MAY_DROP_FROM_HEIGHT(ped, true);
-                        SET_PED_PATH_MAY_USE_CLIMBOVERS(ped, true);
-                        SET_PED_PATH_MAY_USE_LADDERS(ped, true);
-                        SET_PED_PATH_WILL_AVOID_DYNAMIC_OBJECTS(ped, true);
-                        SET_CHAR_WILL_DO_DRIVEBYS(ped, true);
-                        SET_CHAR_WEAPON_SKILL(ped, 5);
-                        SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped, true);
-                        SET_CHAR_ACCURACY(ped, 100);
-                        SET_CHAR_SHOOT_RATE(ped, 300);
-                        SET_CHAR_GRAVITY(ped, 2);
-                        SET_CHAR_SIGNAL_AFTER_KILL(ped, true);
+                        SET_PED_PATH_MAY_DROP_FROM_HEIGHT(ped, true); //jumping off the building or roof
+                        SET_PED_PATH_MAY_USE_CLIMBOVERS(ped, true); //parkour and jumping stuffs
+                        SET_PED_PATH_MAY_USE_LADDERS(ped, true); //ladder climbing
+                        SET_PED_PATH_WILL_AVOID_DYNAMIC_OBJECTS(ped, true); //avoid vehicles/peds or other things
+                        SET_CHAR_WILL_DO_DRIVEBYS(ped, true); //using weapons while driving (only passenger uses guns)
+                        SET_CHAR_WEAPON_SKILL(ped, 5); //idk about it but will see
+                        SET_CHAR_WILL_USE_CARS_IN_COMBAT(ped, true); //prefer using cars to ram if inside vehicle
+                        SET_CHAR_ACCURACY(ped, 100); //accuracy
+                        SET_CHAR_SHOOT_RATE(ped, 300); //rate of fire
+                        SET_CHAR_GRAVITY(ped, 2); //hmm
+                        SET_CHAR_SIGNAL_AFTER_KILL(ped, true); //signal like swat does
                         NativeWorld.GetPedInstaceFromHandle(ped).GetTaskController().FightAgainstHatedTargets(100, 100000);
 
                         // Buff generic law enforcement ped
