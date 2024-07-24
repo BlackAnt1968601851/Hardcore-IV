@@ -13,10 +13,10 @@
   <PropertyGroup />
   <ItemGroup>
     <Reference Include="ClonksCodingLib.GTAIV">
-      <HintPath>..\Games\Grand Theft Auto IV\GTAIV\IVSDKDotNet\bin\ClonksCodingLib.GTAIV.dll</HintPath>
+      <HintPath>..\..\Games\Grand Theft Auto IV\GTAIV\IVSDKDotNet\bin\ClonksCodingLib.GTAIV.dll</HintPath>
     </Reference>
     <Reference Include="IVSDKDotNetWrapper">
-      <HintPath>..\Games\Grand Theft Auto IV\GTAIV\IVSDKDotNetWrapper.dll</HintPath>
+      <HintPath>..\..\Games\Grand Theft Auto IV\GTAIV\IVSDKDotNetWrapper.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

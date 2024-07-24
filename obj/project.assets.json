@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Hardcore-IV\\HardCore.csproj",
+      "projectUniqueName": "E:\\HardcoreIV\\HardCore.csproj",
       "projectName": "HardCore.ivsdk",
-      "projectPath": "E:\\Hardcore-IV\\HardCore.csproj",
+      "projectPath": "E:\\HardcoreIV\\HardCore.csproj",
       "packagesPath": "C:\\Users\\Sarthak\\.nuget\\packages\\",
-      "outputPath": "E:\\Hardcore-IV\\obj\\",
+      "outputPath": "E:\\HardcoreIV\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Apps\\Microsoft\\Visual Studio 2022\\SDKs\\NuGetPackages"

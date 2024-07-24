@@ -1,22 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Hardcore-IV\\",
+  "WorkspaceRootPath": "E:\\HardcoreIV\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|e:\\hardcore-iv\\codes\\lawfixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\lawfixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|e:\\hardcoreiv\\codes\\combattweaks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\combattweaks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\Hardcore-IV\\codes\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\HardcoreIV\\codes\\somefixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\somefixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\Hardcore-IV\\codes\\playercorestuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\HardcoreIV\\codes\\playercorestuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\playercorestuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\Hardcore-IV\\codes\\somefixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\somefixes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\HardcoreIV\\codes\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|E:\\HardcoreIV\\codes\\helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0B0DE6B-91C7-47AF-BEA9-D2404C1DB7FD}|HardCore.csproj|solutionrelative:codes\\helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,51 +38,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "SomeFixes.cs",
-              "DocumentMoniker": "E:\\Hardcore-IV\\Codes\\SomeFixes.cs",
+              "DocumentMoniker": "E:\\HardcoreIV\\Codes\\SomeFixes.cs",
               "RelativeDocumentMoniker": "Codes\\SomeFixes.cs",
-              "ToolTip": "E:\\Hardcore-IV\\Codes\\SomeFixes.cs",
+              "ToolTip": "E:\\HardcoreIV\\Codes\\SomeFixes.cs",
               "RelativeToolTip": "Codes\\SomeFixes.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAgwCMAAAA5AAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAowBgAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T16:39:32.359Z"
+              "WhenOpened": "2024-07-20T15:44:54.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Main.cs",
+              "DocumentMoniker": "E:\\HardcoreIV\\Codes\\Main.cs",
+              "RelativeDocumentMoniker": "Codes\\Main.cs",
+              "ToolTip": "E:\\HardcoreIV\\Codes\\Main.cs",
+              "RelativeToolTip": "Codes\\Main.cs",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAswIYAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-17T16:12:32.434Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "PlayerCoreStuff.cs",
-              "DocumentMoniker": "E:\\Hardcore-IV\\Codes\\PlayerCoreStuff.cs",
+              "DocumentMoniker": "E:\\HardcoreIV\\Codes\\PlayerCoreStuff.cs",
               "RelativeDocumentMoniker": "Codes\\PlayerCoreStuff.cs",
-              "ToolTip": "E:\\Hardcore-IV\\Codes\\PlayerCoreStuff.cs",
+              "ToolTip": "E:\\HardcoreIV\\Codes\\PlayerCoreStuff.cs",
               "RelativeToolTip": "Codes\\PlayerCoreStuff.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAqwAcAAAAPAAAA",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAAAIoAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T16:39:22.418Z"
+              "WhenOpened": "2024-07-17T15:46:51.157Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Main.cs",
-              "DocumentMoniker": "E:\\Hardcore-IV\\Codes\\Main.cs",
-              "RelativeDocumentMoniker": "Codes\\Main.cs",
-              "ToolTip": "E:\\Hardcore-IV\\Codes\\Main.cs",
-              "RelativeToolTip": "Codes\\Main.cs",
-              "ViewState": "AQIAAF0AAAAAAAAAAAAIwAcAAAAPAAAA",
+              "DocumentIndex": 4,
+              "Title": "Helpers.cs",
+              "DocumentMoniker": "E:\\HardcoreIV\\Codes\\Helpers.cs",
+              "RelativeDocumentMoniker": "Codes\\Helpers.cs",
+              "ToolTip": "E:\\HardcoreIV\\Codes\\Helpers.cs",
+              "RelativeToolTip": "Codes\\Helpers.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAADUAAABSAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T16:38:58.767Z"
+              "WhenOpened": "2024-07-17T14:59:29.728Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LawFixes.cs",
-              "DocumentMoniker": "E:\\Hardcore-IV\\Codes\\LawFixes.cs",
-              "RelativeDocumentMoniker": "Codes\\LawFixes.cs",
-              "ToolTip": "E:\\Hardcore-IV\\Codes\\LawFixes.cs",
-              "RelativeToolTip": "Codes\\LawFixes.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAiwDMAAAAfAAAA",
+              "Title": "CombatTweaks.cs",
+              "DocumentMoniker": "E:\\HardcoreIV\\Codes\\CombatTweaks.cs",
+              "RelativeDocumentMoniker": "Codes\\CombatTweaks.cs",
+              "ToolTip": "E:\\HardcoreIV\\Codes\\CombatTweaks.cs*",
+              "RelativeToolTip": "Codes\\CombatTweaks.cs*",
+              "ViewState": "AQIAANAAAAAAAAAAAAAxwOMAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T16:36:24.336Z",
+              "WhenOpened": "2024-07-17T14:50:16.309Z",
               "EditorCaption": ""
             }
           ]
