@@ -23,3 +23,16 @@ E:\HardcoreIV\obj\Debug\net48\HardCore.csproj.CoreCompileInputs.cache
 E:\HardcoreIV\obj\Debug\net48\HardCore.csproj.Up2Date
 E:\HardcoreIV\obj\Debug\net48\HardCore.ivsdk.dll
 E:\HardcoreIV\obj\Debug\net48\HardCore.ivsdk.pdb
+D:\Hardcore-IV\bin\Debug\net48\HardCore.ivsdk.dll
+D:\Hardcore-IV\bin\Debug\net48\HardCore.ivsdk.pdb
+D:\Hardcore-IV\bin\Debug\net48\ClonksCodingLib.GTAIV.dll
+D:\Hardcore-IV\bin\Debug\net48\IVSDKDotNetWrapper.dll
+D:\Hardcore-IV\bin\Debug\net48\ClonksCodingLib.GTAIV.xml
+D:\Hardcore-IV\bin\Debug\net48\IVSDKDotNetWrapper.xml
+D:\Hardcore-IV\obj\Debug\net48\HardCore.csproj.AssemblyReference.cache
+D:\Hardcore-IV\obj\Debug\net48\HardCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hardcore-IV\obj\Debug\net48\HardCore.csproj.CoreCompileInputs.cache
+D:\Hardcore-IV\obj\Debug\net48\HardCore.sourcelink.json
+D:\Hardcore-IV\obj\Debug\net48\HardCore.csproj.Up2Date
+D:\Hardcore-IV\obj\Debug\net48\HardCore.ivsdk.dll
+D:\Hardcore-IV\obj\Debug\net48\HardCore.ivsdk.pdb

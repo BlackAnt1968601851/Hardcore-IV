@@ -230,7 +230,7 @@ Use with: IVGlobalScene.FromUIntPtr(...);
         </member>
         <member name="M:IVSDKDotNet.IVShadows.StoreStaticShadow(System.Boolean,System.Numerics.Vector3,System.Drawing.Color,System.Single,System.Single)">
             <summary>
-StoreStaticShadows method with basic parameters.
+StoreStaticShadows method with basic parameters. This internally calls the AddSceneLight function.
 </summary>
             <param name="castShadows">Should light cast shadows?</param>
             <param name="vPos">The position of the light.</param>
@@ -238,26 +238,39 @@ StoreStaticShadows method with basic parameters.
             <param name="fIntensity">Light Intensity.</param>
             <param name="fRange">Light Range.</param>
         </member>
-        <member name="M:IVSDKDotNet.IVShadows.StoreStaticShadowAdvanced(System.UInt32,System.UInt32,System.Boolean,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Drawing.Color,System.Single,System.UInt32,System.UInt32,System.Single,System.Single,System.Single,System.UInt32,System.UInt32,System.UInt32)">
+        <member name="M:IVSDKDotNet.IVShadows.StoreStaticShadow(System.Boolean,System.Numerics.Vector3,System.Drawing.Color,System.Single,System.Single,System.UInt32)">
             <summary>
-StoreStaticShadows method with extended parameters.
+StoreStaticShadows method with basic parameters. This internally calls the AddSceneLight function.
+</summary>
+            <param name="castShadows">Should light cast shadows?</param>
+            <param name="vPos">The position of the light.</param>
+            <param name="vColor">The color of the light.</param>
+            <param name="fIntensity">Light Intensity.</param>
+            <param name="fRange">Light Range.</param>
+            <param name="nID">Used by shadow system to track scene lights - 0 if no shadows and tracking.</param>
+        </member>
+        <member name="M:IVSDKDotNet.IVShadows.AddSceneLight(System.UInt32,System.UInt32,System.UInt32,System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Drawing.Color,System.Single,System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.UInt32,System.UInt32)">
+            <summary>
+Adds a light to the scene!
 </summary>
             <param name="a1">Unknown.</param>
-            <param name="a2">Unknown.</param>
-            <param name="castShadows">Should light cast shadows?</param>
-            <param name="pVec1">Unknown.</param>
-            <param name="pVec2">Unknown.</param>
-            <param name="vPos">Light Position.</param>
-            <param name="vColor">Light Color.</param>
-            <param name="fIntensity">Light Intensity.</param>
-            <param name="texHash">Unknown.</param>
-            <param name="txdSlot">Unknown.</param>
-            <param name="fRange">Light Range.</param>
-            <param name="a12">Unknown.</param>
-            <param name="a13">Unknown.</param>
-            <param name="a14">Unknown.</param>
+            <param name="nLightType">The type of the light.</param>
+            <param name="nFlags">The light flags.</param>
+            <param name="vDir">The light direction.</param>
+            <param name="vTanDir">The light tangent direction.</param>
+            <param name="vPos">The light position.</param>
+            <param name="vColor">The light color.</param>
+            <param name="fIntensity">The light intensity.</param>
+            <param name="txdSlot">The slot the texture is in.</param>
+            <param name="texHash">The texture hash within the given slot.</param>
+            <param name="fRange">The light range.</param>
+            <param name="fInnerConeAngle">The volume inner cone angle.</param>
+            <param name="fOuterConeAngle">The volume outer cone angle.</param>
+            <param name="fVolIntensity">The volume intensity (brightness).</param>
+            <param name="fVolSizeScale">The volume radius scale (1.0f means the same radius as the light).</param>
+            <param name="interiorId">If you want the light to work in an interior, this needs to be set to the current interior the char is in. Use the GET_INTERIOR_FROM_CHAR native to get the interior.</param>
             <param name="a15">Unknown.</param>
-            <param name="nID">Light ID.</param>
+            <param name="nID">Used by shadow system to track scene lights - 0 if no shadows and tracking.</param>
         </member>
         <member name="P:IVSDKDotNet.IVVisibilityPlugins.StipplePath">
             <summary>
@@ -490,6 +503,20 @@ Use IVDoor.GroupID for vehicle doors, haven't found a way to see the rest of the
             <param name="groupId">The fragment group id to detach.</param>
             <returns>The detached fragment group?</returns>
         </member>
+        <member name="M:IVSDKDotNet.IVModelInfo.GetModelInfoFromIndex(System.Int32)">
+            <summary>
+If you have the index from the model info that you want to get, you can use this function here to get the "IVBaseModelInfo" instance instead of using the "ModelInfos" array (Which would be slower as its creating garbage collections).
+</summary>
+            <param name="index">The index between 0 and 31000.</param>
+            <returns>If found, the "IVBaseModelInfo" instance is returned.</returns>
+        </member>
+        <member name="M:IVSDKDotNet.IVModelInfo.GetIndexFromHashKey(System.UInt32)">
+            <summary>
+Returns the same as the "index" out-parameter of the "GetModelInfo" function would, but this creates no garbage collection allocations.
+</summary>
+            <param name="hashKey">The hash key to get the index from.</param>
+            <returns>The index from the given hask key. Returns -1 if the index could not be found or if the given hash key is invalid.</returns>
+        </member>
         <member name="M:IVSDKDotNet.IVVehicleModelInfo.SetHandlingParams(IVSDKDotNet.IVHandlingData,System.Numerics.Vector3)">
             <summary>
 Sets the center of mass and mass in the phBound based on the center of mass param and fMass off handling.
@@ -499,12 +526,12 @@ Sets the center of mass and mass in the phBound based on the center of mass para
         </member>
         <member name="P:IVSDKDotNet.IVBaseModelInfo.FragType">
             <summary>
-Use with: IVGtaFragType.FromPointer(...);
+Use with: IVGtaFragType.FromUIntPtr(...);
 </summary>
         </member>
         <member name="P:IVSDKDotNet.IVBaseModelInfo.Archetype">
             <summary>
-Use with: IVPhArchetypeGta.FromPointer(...);
+Use with: IVPhArchetypeGta.FromUIntPtr(...);
 </summary>
         </member>
         <member name="P:IVSDKDotNet.IVVehicle.VehicleFragInst">
@@ -692,6 +719,11 @@ Gets the main Viewport of ImGui.
 Can be passed to ImGui Widgets so that they use the full width available. Uses the 'FloatMin' property for the Vector2's 'X' value.
 </summary>
         </member>
+        <member name="P:IVSDKDotNet.ImGuiIV.ActiveScriptWindows">
+            <summary>
+Gets the number of active script windows..
+</summary>
+        </member>
         <member name="P:IVSDKDotNet.ImGuiIV.FloatMin">
             <summary>
 Min normalized positive value.
@@ -700,6 +732,16 @@ Min normalized positive value.
         <member name="P:IVSDKDotNet.ImGuiIV.ForceCursor">
             <summary>
 Gets or sets if the cursor is currently forced to be drawn on screen.
+</summary>
+        </member>
+        <member name="P:IVSDKDotNet.ImGuiIV_IO.IsValid">
+            <summary>
+Gets if this struct contains valid data.
+</summary>
+        </member>
+        <member name="P:IVSDKDotNet.ImGuiIV_IO.ImGuiIOPtr">
+            <summary>
+Native Pointer to the ImGuiIO structure.
 </summary>
         </member>
         <member name="P:IVSDKDotNet.ImGuiIV_InputTextState.ReloadSelectionStart">
@@ -1291,9 +1333,19 @@ Format: IVSDKDotNet@[DAY][MONTH][YEAR]@[MILLISECOND].log
 Gets the current version of IV-SDK .NET
 </summary>
         </member>
+        <member name="P:CLR.CLRBridge.DisableInputs">
+            <summary>
+Will get set to true when any ImGui window is open and it wants text input.
+</summary>
+        </member>
         <member name="P:CLR.CLRBridge.DisableScriptHookDotNetLoading">
             <summary>
-Only set to true if the IV-SDK .NET ScriptHookDotNet mod loader is activated AND the user installed the old ScriptHookDotNet to avoid conflicts.
+Will get set to true only if the IV-SDK .NET ScriptHookDotNet mod loader is activated AND the user installed the old ScriptHookDotNet to avoid conflicts.
+</summary>
+        </member>
+        <member name="P:CLR.CLRBridge.IsShuttingDown">
+            <summary>
+Will get set to true when everything is about to shut down. 
 </summary>
         </member>
         <member name="P:CLR.CLRBridge.CanTerminate">
@@ -1309,7 +1361,7 @@ This is usually only set to true if an error occured while trying to load the IV
         </member>
         <member name="T:CLR.CLRBridge">
             <summary>
-Bridge between IVSDKDotNet.asi and IVSDKDotNetWrapper.dll.
+The main bridge between IVSDKDotNet.asi and IVSDKDotNetWrapper.dll.
 There can only be one instance of this class.
 </summary>
         </member>
@@ -1317,71 +1369,6 @@ There can only be one instance of this class.
             <summary>
 Only used for the IV-SDK .NET Manager.
 There can only be one instance of this class.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.IngameStartupEventExecutionTime">
-            <summary>
-Gets how much time the IngameStartup event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.KeyUpEventExecutionTime">
-            <summary>
-Gets how much time the KeyUp event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.KeyDownEventExecutionTime">
-            <summary>
-Gets how much time the KeyDown event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.OnFirstD3D9FrameEventExecutionTime">
-            <summary>
-Gets how much time the OnFirstD3D9Frame event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.ProcessPadEventExecutionTime">
-            <summary>
-Gets how much time the ProcessPad event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.ProcessAutomobileEventExecutionTime">
-            <summary>
-Gets how much time the ProcessAutomobile event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.ProcessCameraEventExecutionTime">
-            <summary>
-Gets how much time the ProcessCamera event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.DrawingEventExecutionTime">
-            <summary>
-Gets how much time the Drawing event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.MountDeviceEventExecutionTime">
-            <summary>
-Gets how much time the MountDevice event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.GameLoadPriorityEventExecutionTime">
-            <summary>
-Gets how much time the GameLoadPriority event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.GameLoadEventExecutionTime">
-            <summary>
-Gets how much time the GameLoad event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.TickEventExecutionTime">
-            <summary>
-Gets how much time the Tick event took to execute.
-</summary>
-        </member>
-        <member name="P:IVSDKDotNet.Script.InitializedEventExecutionTime">
-            <summary>
-Gets how much time the Initialized event took to execute.
 </summary>
         </member>
         <member name="P:IVSDKDotNet.Script.WaitTickInterval">
@@ -2088,78 +2075,6 @@ Checks if the specified key is pressed.
             <param name="key">: The key to check if it's pressed.</param>
             <returns>True if the key is pressed, otherwise false.</returns>
         </member>
-        <member name="M:Logger.LogError(System.String)">
-            <summary>
-Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console with the "Error" style.
-</summary>
-            <param name="str">The message to log.</param>
-        </member>
-        <member name="M:Logger.LogError(System.String,System.Boolean)">
-            <summary>
-Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console (if set) with the "Error" style.
-</summary>
-            <param name="str">The message to log.</param>
-            <param name="alsoShowInConsole">Sets if it should also show up in the IV-SDK .NET Console.</param>
-        </member>
-        <member name="M:Logger.LogWarning(System.String)">
-            <summary>
-Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console with the "Warning" style.
-</summary>
-            <param name="str">The message to log.</param>
-        </member>
-        <member name="M:Logger.LogWarning(System.String,System.Boolean)">
-            <summary>
-Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console (if set) with the "Warning" style.
-</summary>
-            <param name="str">The message to log.</param>
-            <param name="alsoShowInConsole">Sets if it should also show up in the IV-SDK .NET Console.</param>
-        </member>
-        <member name="M:Logger.LogDebug(System.String)">
-            <summary>
-Only available in debug builds! Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console with the "Debug" style.
-</summary>
-            <param name="str">The message to log.</param>
-        </member>
-        <member name="M:Logger.LogDebug(System.String,System.Boolean)">
-            <summary>
-Only available in debug builds! Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console (if set) with the "Debug" style.
-</summary>
-            <param name="str">The message to log.</param>
-            <param name="alsoShowInConsole">Sets if it should also show up in the IV-SDK .NET Console.</param>
-        </member>
-        <member name="M:Logger.Log(System.String)">
-            <summary>
-Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console without a specific style.
-</summary>
-            <param name="str">The message to log.</param>
-        </member>
-        <member name="M:Logger.Log(System.String,System.Boolean)">
-            <summary>
-Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console (if set) without a specific style.
-</summary>
-            <param name="str">The message to log.</param>
-            <param name="alsoShowInConsole">Sets if it should also show up in the IV-SDK .NET Console.</param>
-        </member>
-        <member name="P:Logger.tLogItem.AddInConsole">
-            <summary>
-Gets if this item should also be in the IV-SDK .NET Console.
-</summary>
-        </member>
-        <member name="P:Logger.tLogItem.Text">
-            <summary>
-Get the text of this item.
-</summary>
-        </member>
-        <member name="P:Logger.tLogItem.Style">
-            <summary>
-Gets the style of this item for the IV-SDK .NET Console.
-</summary>
-        </member>
-        <member name="P:Logger.tLogItem.LogTime">
-            <summary>
-Gets the time this item was logged.
-</summary>
-        </member>
         <member name="M:IVSDKDotNet.SettingsFile.SetVector4(System.String,System.String,System.Numerics.Vector4)">
             <summary>
 Sets the Vector4 from the given section and key strings from the loaded ini file.
@@ -2425,6 +2340,92 @@ The path to the ini file.
 Can be used to save and load settings.
 If your script has a settings file, it will be automatically loaded.
 Inline comments are not supported!
+</summary>
+        </member>
+        <member name="T:IVSDKDotNet.Hooking.GameHooks">
+            <summary>
+Contains hooks for certain game functions.
+</summary>
+        </member>
+        <member name="M:IVSDKDotNet.Hooking.Patterns.GetAddress(System.String,System.UInt32,System.UInt32)">
+            <summary>
+Scans for the given pattern and returns the address.
+</summary>
+            <param name="pattern">The pattern to scan for.</param>
+            <param name="index">Get the match at that index.</param>
+            <param name="offset">Offset for the pattern.</param>
+            <returns>The address from the given pattern.</returns>
+        </member>
+        <member name="M:Logger.LogError(System.String)">
+            <summary>
+Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console with the "Error" style.
+</summary>
+            <param name="str">The message to log.</param>
+        </member>
+        <member name="M:Logger.LogError(System.String,System.Boolean)">
+            <summary>
+Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console (if set) with the "Error" style.
+</summary>
+            <param name="str">The message to log.</param>
+            <param name="alsoShowInConsole">Sets if it should also show up in the IV-SDK .NET Console.</param>
+        </member>
+        <member name="M:Logger.LogWarning(System.String)">
+            <summary>
+Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console with the "Warning" style.
+</summary>
+            <param name="str">The message to log.</param>
+        </member>
+        <member name="M:Logger.LogWarning(System.String,System.Boolean)">
+            <summary>
+Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console (if set) with the "Warning" style.
+</summary>
+            <param name="str">The message to log.</param>
+            <param name="alsoShowInConsole">Sets if it should also show up in the IV-SDK .NET Console.</param>
+        </member>
+        <member name="M:Logger.LogDebug(System.String)">
+            <summary>
+Only available in debug builds! Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console with the "Debug" style.
+</summary>
+            <param name="str">The message to log.</param>
+        </member>
+        <member name="M:Logger.LogDebug(System.String,System.Boolean)">
+            <summary>
+Only available in debug builds! Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console (if set) with the "Debug" style.
+</summary>
+            <param name="str">The message to log.</param>
+            <param name="alsoShowInConsole">Sets if it should also show up in the IV-SDK .NET Console.</param>
+        </member>
+        <member name="M:Logger.Log(System.String)">
+            <summary>
+Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console without a specific style.
+</summary>
+            <param name="str">The message to log.</param>
+        </member>
+        <member name="M:Logger.Log(System.String,System.Boolean)">
+            <summary>
+Logs a message to the IVSDKDotNet.log file and also shows it in the IV-SDK .NET Console (if set) without a specific style.
+</summary>
+            <param name="str">The message to log.</param>
+            <param name="alsoShowInConsole">Sets if it should also show up in the IV-SDK .NET Console.</param>
+        </member>
+        <member name="P:Logger.tLogItem.AddInConsole">
+            <summary>
+Gets if this item should also be in the IV-SDK .NET Console.
+</summary>
+        </member>
+        <member name="P:Logger.tLogItem.Text">
+            <summary>
+Get the text of this item.
+</summary>
+        </member>
+        <member name="P:Logger.tLogItem.Style">
+            <summary>
+Gets the style of this item for the IV-SDK .NET Console.
+</summary>
+        </member>
+        <member name="P:Logger.tLogItem.LogTime">
+            <summary>
+Gets the time this item was logged.
 </summary>
         </member>
         <member name="F:IVSDKDotNet.Enums.eImGuiTableColumnFlags.IsHovered">
@@ -3183,6 +3184,12 @@ Pad with style.WindowPadding even if no border are drawn (no padding by default 
 Show an outer border and enable WindowPadding. (IMPORTANT: this is always == 1 == true for legacy reason)
 </summary>
         </member>
+        <member name="F:&lt;unknown type&gt;.DisableControllerInput">
+            <summary>
+This makes the window able to disable the controller input, so GTA IV doesn't receive any controller input anymore. 
+Useful for when you want to navigate through your ImGui window with a controller.
+</summary>
+        </member>
         <member name="F:&lt;unknown type&gt;.NoMouseEnable">
             <summary>
 This makes the window not being able to enable the mouse cursor.
@@ -3874,6 +3881,21 @@ IsWindowHovered() only: Return true if any children of the window is hovered
 Return true if directly over the item/window, not obstructed by another window, not obstructed by an active popup or modal blocking inputs under them.
 </summary>
         </member>
+        <member name="F:IVSDKDotNet.Enums.eImGuiMouseSource.Pen">
+            <summary>
+Input is coming from a pressure/magnetic pen (often used in conjunction with high-sampling rates).
+</summary>
+        </member>
+        <member name="F:IVSDKDotNet.Enums.eImGuiMouseSource.TouchScreen">
+            <summary>
+Input is coming from a touch screen (no hovering prior to initial press, less precise initial press aiming, dual-axis wheeling possible).
+</summary>
+        </member>
+        <member name="F:IVSDKDotNet.Enums.eImGuiMouseSource.Mouse">
+            <summary>
+Input is coming from an actual mouse.
+</summary>
+        </member>
         <member name="F:IVSDKDotNet.Enums.eImGuiButtonFlags.MouseButtonMiddle">
             <summary>
 React on center mouse button
@@ -3957,6 +3979,69 @@ Something unknown happened.
         <member name="F:&lt;unknown type&gt;.OK">
             <summary>
 All good!
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.TrafficLight">
+            <summary>
+This i can spot on traffic lights
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.Vehicle">
+            <summary>
+This i can spot on vehicle lights (headlights, brake lights, indicator lights and sirens).
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.Unk3">
+            <summary>
+Never actually seen being used.
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.ExteriorOnly">
+            <summary>
+Exterior only? This i can also spot on *almost* every light so far that is outside. Entities like the player and vehicles also have this flag, when entering an interior, the light with this flag goes away. Must be exterior only!
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.InteriorOnly">
+            <summary>
+Interior only? Only spotted on lights that where indoors. Tho this flag is also on street lights combined with flag 64 (ExteriorOnly).
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.Buzzing">
+            <summary>
+Pretty sure this is a flag for Flickering/Buzzing light. This is quite hard to see actually.
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.DrawVolume">
+            <summary>
+This flag makes the light volumetric!
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.CastShadow">
+            <summary>
+This flag makes the light cast a shadow!
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.Unk2">
+            <summary>
+Unknown for now.
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.Unk1">
+            <summary>
+Unknown for now. Mostly appears on entities like the player or vehicles. Ambient occlusion?
+</summary>
+            <summary>
+This i can spot on *almost* every light so far. Not quite sure what this is for tho.
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.Spot">
+            <summary>
+A spot light.
+</summary>
+        </member>
+        <member name="F:&lt;unknown type&gt;.Point">
+            <summary>
+A point light. They are everywhere!
 </summary>
         </member>
         <member name="F:IVSDKDotNet.Enums.eNewGetInVehicleType.GET_IN_DEFAULT_PLAYER">

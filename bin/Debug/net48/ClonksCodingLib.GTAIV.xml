@@ -612,6 +612,69 @@
             <param name="animSetName">The name of the animation set.</param>
             <param name="animNames">The collection of animation names inside the animation set.</param>
         </member>
+        <member name="T:CCL.GTAIV.ImGuiHelper">
+            <summary>
+            Contains some helper functions for ImGui.
+            </summary>
+        </member>
+        <member name="M:CCL.GTAIV.ImGuiHelper.ConvertKeyToImGuiKey(System.Windows.Forms.Keys)">
+            <summary>
+            Tries to convert the given <paramref name="key"/> to an <see cref="T:IVSDKDotNet.Enums.eImGuiKey"/> key.
+            </summary>
+            <param name="key">The key you want to convert to a <see cref="T:IVSDKDotNet.Enums.eImGuiKey"/> key.</param>
+            <returns>The converted key. Can return <see cref="F:IVSDKDotNet.Enums.eImGuiKey.ImGuiKey_None"/> if the given <paramref name="key"/> could not be converted.</returns>
+        </member>
+        <member name="M:CCL.GTAIV.ImGuiHelper.ConvertKeyToImGuiKey(System.String)">
+            <summary>
+            Tries to convert the given <paramref name="key"/> to an <see cref="T:IVSDKDotNet.Enums.eImGuiKey"/> key.
+            </summary>
+            <param name="key">The name of the key you want to convert to a <see cref="T:IVSDKDotNet.Enums.eImGuiKey"/> key.</param>
+            <returns>The converted key. Can return <see cref="F:IVSDKDotNet.Enums.eImGuiKey.ImGuiKey_None"/> if the given <paramref name="key"/> could not be converted.</returns>
+        </member>
+        <member name="M:CCL.GTAIV.ImGuiHelper.IsKeyPressed(System.String,System.Boolean)">
+            <summary>
+            Helper function which checks if a key is pressed.
+            <para>
+            This also allows you to check if a key was pressed with a modifier key.<br/>
+            Example <b>without</b> modifier: Passing "<b>P</b>" to <paramref name="key"/> would check if "<b>P</b>" was pressed.<br/>
+            Example <b>with</b> modifier: Passing "<b>LControlKey+P</b>" to <paramref name="key"/> would check if "<b>P</b>" was pressed with "<b>LControlKey</b>".<br/>
+            </para>
+            </summary>
+            <param name="key">The key that you want to check.</param>
+            <param name="repeat">If set to <see langword="true"/>, this function keeps returning <see langword="true"/> if the specified <paramref name="key"/> is currently pressed. Otherwise it will only return <see langword="true"/> once.</param>
+            <returns><see langword="true"/> if the specified <paramref name="key"/> was pressed. Otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="T:CCL.GTAIV.LightHelper">
+            <summary>
+            Some light helper functions.
+            </summary>
+        </member>
+        <member name="M:CCL.GTAIV.LightHelper.AddPointLight(System.Numerics.Vector3,System.Drawing.Color,System.Single,System.Single,System.Boolean,System.UIntPtr)">
+            <summary>
+            Adds a point light to the world.
+            </summary>
+            <param name="pos">The light position in the world.</param>
+            <param name="color">The color of the light.</param>
+            <param name="intensity">The light intensity.</param>
+            <param name="range">The light range.</param>
+            <param name="castShadow">If the light casts a shadow.</param>
+            <param name="lightId">If you want the light to cast a shadow, you should give it the pointer of the player ped. Otherwise this can be <see cref="F:System.UIntPtr.Zero"/>.</param>
+        </member>
+        <member name="M:CCL.GTAIV.LightHelper.AddSpotLight(System.Numerics.Vector3,System.Numerics.Vector3,System.Drawing.Color,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.UIntPtr)">
+            <summary>
+            Adds a spot light to the world.
+            </summary>
+            <param name="source">The light source position.</param>
+            <param name="target">The target position the light should be pointing at.</param>
+            <param name="color">The color of the light.</param>
+            <param name="intensity">The light intensity.</param>
+            <param name="range">The light range.</param>
+            <param name="innerConeAngle">The inner cone angle of the spot light.</param>
+            <param name="outerConeAngle">The outer cone angle of the spot light.</param>
+            <param name="volIntensity">If you want the light to be volumetric, you can set the intensity (brightness) here.</param>
+            <param name="volSizeScale">The scale of the volume (1.0f means the same radius as the light).</param>
+            <param name="lightId">The id of the light. This can be <see cref="F:System.UIntPtr.Zero"/>, but you can also give it the pointer of the player ped.</param>
+        </member>
         <member name="T:CCL.GTAIV.NativeBlip">
             <summary>
             Gives you easy access to native functions that involve blips.
@@ -1183,13 +1246,18 @@
             </summary>
             <param name="name">The script name without extension.</param>
         </member>
-        <member name="M:CCL.GTAIV.NativeGame.DisplayCustomHelpMessage(System.String,System.Boolean,System.Boolean)">
+        <member name="M:CCL.GTAIV.NativeGame.DisplayCustomHelpMessage(System.String,System.Boolean,System.Boolean,System.String)">
             <summary>
             Displays a custom help message at the top left of the screen.
             </summary>
             <param name="text">The text you want to display.</param>
             <param name="noSound">If the message should display without any sound.</param>
             <param name="forever">If the message should be visible all the time. Make sure to call <see cref="M:IVSDKDotNet.Native.Natives.CLEAR_HELP"/> once you're done.</param>
+            <param name="targetReplacementGXT">
+            This method works by replacing the text of an unused GXT entry to show your own custom <paramref name="text"/>.<br/>
+            If you like to specify which GXT entry should be replaced, you can do that here.<br/>
+            This can be useful to check if a help message is currently being displayed by using <see cref="M:IVSDKDotNet.Native.Natives.IS_THIS_HELP_MESSAGE_BEING_DISPLAYED(System.String)"/>.
+            </param>
         </member>
         <member name="M:CCL.GTAIV.NativeGame.StartNewScript(System.String,System.UInt32)">
             <summary>
@@ -1514,6 +1582,74 @@
             Adds a simple blip for this pickup.
             </summary>
         </member>
+        <member name="M:CCL.GTAIV.NativePickup.RenderWeaponPickupsBigger(System.Boolean)">
+            <summary>
+            Sets if weapon pickups should be rendered bigger in-game.
+            </summary>
+            <param name="value">True, weapon pickups will render bigger. False, weapon pickups will not render bigger.</param>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.SetPickupsFixCars(System.Boolean)">
+            <summary>
+            Sets if pickups fix cars.
+            </summary>
+            <param name="value">True, pickups will fix cars. False, pickups will not fix cars.</param>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.SetAllPickupsOfTypeCollectableByCar(IVSDKDotNet.Enums.ePickupType,System.Boolean)">
+            <summary>
+            Sets if pickups of the given type can be collected by car.
+            </summary>
+            <param name="type">The pickup type this should apply on.</param>
+            <param name="value">True if pickups of given type will be collectable by car. False if pickups of given type will not be collectable by car.</param>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.SetAlwaysDisplayWeaponPickupMessage(System.Boolean)">
+            <summary>
+            Probably sets the message that will be displayed when the game asks you to replace the current weapon with the new weapon.
+            </summary>
+            <param name="value">True if the message should always display. Otherwise, false.</param>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.RemoveAllPickupsOfType(IVSDKDotNet.Enums.ePickupType)">
+            <summary>
+            Removes all pickups of the given type.
+            </summary>
+            <param name="type">The target type.</param>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.Exists">
+            <inheritdoc/>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.HasPlayerCollectedPickup(System.Int32)">
+            <summary>
+            Gets if the pickup has been collected by the given player.
+            </summary>
+            <param name="playerIndex">The player to check on.</param>
+            <returns>True if the given player has collected the pickup. Otherwise, false.</returns>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.AttachBlip">
+            <summary>
+            Attaches a <see cref="T:CCL.GTAIV.NativeBlip"/> to this <see cref="T:CCL.GTAIV.NativePickup"/>.
+            </summary>
+            <returns>If successful, the attached <see cref="T:CCL.GTAIV.NativeBlip"/> is returned. Otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.GetSafePickupPositionAtPos(System.Numerics.Vector3)">
+            <summary>
+            Gets a safe position for a pickup from the given position.
+            </summary>
+            <param name="targetPos">Target position to get a safe pickup position from.</param>
+            <returns>The safe position.</returns>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.IsAnyPickupAtPos(System.Numerics.Vector3)">
+            <summary>
+            Gets if any pickup is at the given position.
+            </summary>
+            <param name="pos">Target position to check for.</param>
+            <returns>True if there is any pickup at the position. Otherwise, false.</returns>
+        </member>
+        <member name="M:CCL.GTAIV.NativePickup.IsMoneyPickupAtPos(System.Numerics.Vector3)">
+            <summary>
+            Gets if any money pickup is at the given position.
+            </summary>
+            <param name="pos">Target position to check for.</param>
+            <returns>True if there is any money pickup at the position. Otherwise, false.</returns>
+        </member>
         <member name="M:CCL.GTAIV.NativePickup.CreatePickup(IVSDKDotNet.Enums.ePickupModel,IVSDKDotNet.Enums.ePickupType,System.Numerics.Vector3)">
             <summary>
             Creates a pickup at the given location.
@@ -1550,74 +1686,6 @@
             <param name="pos">The pickup position.</param>
             <param name="amount">The money amount.</param>
             <returns>If successful, the newly created pickup is returned. Otherwise, false.</returns>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.RenderWeaponPickupsBigger(System.Boolean)">
-            <summary>
-            Sets if weapon pickups should be rendered bigger in-game.
-            </summary>
-            <param name="value">True, weapon pickups will render bigger. False, weapon pickups will not render bigger.</param>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.SetAllPickupsOfTypeCollectableByCar(IVSDKDotNet.Enums.ePickupType,System.Boolean)">
-            <summary>
-            Sets if pickups of the given type can be collected by car.
-            </summary>
-            <param name="type">The pickup type this should apply on.</param>
-            <param name="value">True if pickups of given type will be collectable by car. False if pickups of given type will not be collectable by car.</param>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.SetAlwaysDisplayWeaponPickupMessage(System.Boolean)">
-            <summary>
-            Probably sets the message that will be displayed when the game asks you to replace the current weapon with the new weapon.
-            </summary>
-            <param name="value">True if the message should always display. Otherwise, false.</param>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.RemoveAllPickupsOfType(IVSDKDotNet.Enums.ePickupType)">
-            <summary>
-            Removes all pickups of the given type.
-            </summary>
-            <param name="type">The target type.</param>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.Exists">
-            <inheritdoc/>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.HasPlayerCollectedPickup(System.Int32)">
-            <summary>
-            Gets if the pickup has been collected by the given player.
-            </summary>
-            <param name="playerIndex">The player to check on.</param>
-            <returns>True if the given player has collected the pickup. Otherwise, false.</returns>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.GetSafePickupPositionAtPos(System.Numerics.Vector3)">
-            <summary>
-            Gets a safe position for a pickup from the given position.
-            </summary>
-            <param name="targetPos">Target position to get a safe pickup position from.</param>
-            <returns>The safe position.</returns>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.IsAnyPickupAtPos(System.Numerics.Vector3)">
-            <summary>
-            Gets if any pickup is at the given position.
-            </summary>
-            <param name="pos">Target position to check for.</param>
-            <returns>True if there is any pickup at the position. Otherwise, false.</returns>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.IsMoneyPickupAtPos(System.Numerics.Vector3)">
-            <summary>
-            Gets if any money pickup is at the given position.
-            </summary>
-            <param name="pos">Target position to check for.</param>
-            <returns>True if there is any money pickup at the position. Otherwise, false.</returns>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.SetPickupsFixCars(System.Boolean)">
-            <summary>
-            Sets if pickups fix cars.
-            </summary>
-            <param name="value">True, pickups will fix cars. False, pickups will not fix cars.</param>
-        </member>
-        <member name="M:CCL.GTAIV.NativePickup.AttachBlip">
-            <summary>
-            Attaches a <see cref="T:CCL.GTAIV.NativeBlip"/> to this <see cref="T:CCL.GTAIV.NativePickup"/>.
-            </summary>
-            <returns>If successful, the attached <see cref="T:CCL.GTAIV.NativeBlip"/> is returned. Otherwise, <see langword="null"/>.</returns>
         </member>
         <member name="T:CCL.GTAIV.NativeRoom">
             <summary>

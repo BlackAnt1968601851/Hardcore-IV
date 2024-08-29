@@ -1,26 +1,29 @@
 ﻿using CCL.GTAIV;
 using IVSDKDotNet;
 using static IVSDKDotNet.Native.Natives;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IVSDKDotNet.Enums;
 
-namespace HardCore.Codes
+namespace HardCore
 {
-    public class SomeFixes
+    public class WorldFixes
     {
-        private static int playerId;
         private static int currentWeapon;
-        private static Logger log = Main.log;
-        public static void Tick()
+        private static readonly Logger log = Main.log;
+
+        public static void Initiate()
+        {
+            SniperWalkFix();
+        }
+
+        private static void SniperWalkFix()
         {
             try
             {
-				//idhar sniper ka slot change kia gya.
-				//changing sniper slot so that we can move while sniped in/zoomed in
                 GET_CURRENT_CHAR_WEAPON(Helpers.GamePlayerPed.GetHandle(), out currentWeapon);
                 GET_WEAPONTYPE_SLOT((int)currentWeapon, out int slot);
                // bool slotchange = false;

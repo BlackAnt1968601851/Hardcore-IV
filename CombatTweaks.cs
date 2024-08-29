@@ -4,7 +4,6 @@ using IVSDKDotNet;
 using static IVSDKDotNet.Native.Natives;
 using System;
 using System.Collections.Generic;
-using HardCore.Codes;
 using IVSDKDotNet.Enums;
 using System.Numerics;
 using System.Reflection;
@@ -17,6 +16,14 @@ namespace HardCore
     {
         private static List<int> PoliceList = new List<int>();
         private static Logger log = Main.log;
+
+        // Function to unlock islands using stat natives (Island ko unlock karne ka function using stat natives)
+        public static void UnlockIslands()
+        {
+            var stat = GET_INT_STAT((int)eIntStatistic.STAT_ISLANDS_UNLOCKED); // Check stat (Stat ko check karein)
+            if (stat <= 2)
+                SET_INT_STAT((int)eIntStatistic.STAT_ISLANDS_UNLOCKED, 3); // Unlock island if locked (Island ko unlock karein agar locked ho)
+        }
 
         public static void Init(SettingsFile settings)
         {
@@ -46,13 +53,14 @@ namespace HardCore
             LawPeds();
             ArmouredPeds();
             AutoRemoveFromList();
+            UnlockIslands();
         }
 
         public static string[] ArmouredPedsList = { "m_m_armoured" };
         public static string[] SwatAndFbiPedsList = { "m_y_swat", "m_m_fbi" };
 
-		
-		/********************************************
+
+        /********************************************
 		* This Code Makes Armoured Peds- M_M_ARMOURED, and M_Y_SWAT
 		* to prevent headshots if they got helmet equipped.
 		* If they lost the helmet when fallen down or other means, they'll get shot on head and dead.
@@ -88,8 +96,8 @@ namespace HardCore
                     {
                         if (
                             model == RAGE.AtStringHash(ArmouredPedsList[0]) //||
-                       // model == RAGE.AtStringHash(SwatAndFbiPedsList[0]) //||
-                        //model == RAGE.AtStringHash(SwatAndFbiPedsList[1])
+                                                                            // model == RAGE.AtStringHash(SwatAndFbiPedsList[0]) //||
+                                                                            //model == RAGE.AtStringHash(SwatAndFbiPedsList[1])
                         )
                         {
                             IVPed gethandle = NativeWorld.GetPedInstaceFromHandle(handle);
@@ -108,11 +116,11 @@ namespace HardCore
             }
         }
 
-		/******************************************************************
-		* This Code makes different set of peds buffed up depending on the requirment of mods.
-		* SWAT, FBI, Gruppe6 has set of weapons usable.
-		* And a lot of Buffs like DRIVE_BY and all.
-		*******************************************************************/
+        /******************************************************************
+        * This Code makes different set of peds buffed up depending on the requirment of mods.
+        * SWAT, FBI, Gruppe6 has set of weapons usable.
+        * And a lot of Buffs like DRIVE_BY and all.
+        *******************************************************************/
         public static void LawPeds()
         {
             IVPool PedPool = IVPools.GetPedPool();
@@ -141,9 +149,6 @@ namespace HardCore
                     if (PoliceList.Contains(ped))
                         continue;
 
-                    
-
-                    //Function.Call()
                     if (model == RAGE.AtStringHash(ArmouredPedsList[0]) ||
                         model == RAGE.AtStringHash(SwatAndFbiPedsList[0]) ||
                         model == RAGE.AtStringHash(SwatAndFbiPedsList[1]))
@@ -187,25 +192,8 @@ namespace HardCore
                     }
                 }
             }
-		}
-		
-		//Set of Weapons for them.
+        }
 
-        private static eWeaponType[] SwatWeaponList = {
-            eWeaponType.WEAPON_M4,
-            eWeaponType.WEAPON_MP5,
-            eWeaponType.WEAPON_MICRO_UZI,
-            eWeaponType.WEAPON_SHOTGUN,
-            eWeaponType.WEAPON_BARETTA,
-            eWeaponType.WEAPON_SNIPERRIFLE
-        };
-
-        private static eWeaponType[] FbiWeaponList = {
-            eWeaponType.WEAPON_M4,
-            eWeaponType.WEAPON_MP5,
-            eWeaponType.WEAPON_BARETTA,
-            eWeaponType.WEAPON_SHOTGUN
-        };
 
         private static eWeaponType[] ArmouredWeaponList = {
             eWeaponType.WEAPON_AK47,
@@ -230,33 +218,34 @@ namespace HardCore
             if (model == RAGE.AtStringHash(SwatAndFbiPedsList[0]))
             {
                 // SWAT
-                SET_CHAR_PROP_INDEX(ped, 0, (uint)Main.GenerateRandomNumber(0, 2));
-                var primaryWeapon = SwatWeaponList[Main.GenerateRandomNumber(0, SwatWeaponList.Length)];
-                var secondaryWeapon = Handguns[Main.GenerateRandomNumber(0, Handguns.Length)];
-				
+                SET_CHAR_PROP_INDEX(ped, 0, (uint)Helpers.GenerateRandomNumber(0, 2));
+               /* var primaryWeapon = SwatWeaponList[Helpers.GenerateRandomNumber(0, SwatWeaponList.Length)];
+                var secondaryWeapon = Handguns[Helpers.GenerateRandomNumber(0, Handguns.Length)];
+
                 if (!IS_CHAR_IN_ANY_HELI(ped))
-					REMOVE_ALL_CHAR_WEAPONS(ped);
-                {   GIVE_WEAPON_TO_CHAR(ped, (int)primaryWeapon, 300, true);
+                    REMOVE_ALL_CHAR_WEAPONS(ped);
+                {
+                    GIVE_WEAPON_TO_CHAR(ped, (int)primaryWeapon, 300, true);
                     GIVE_WEAPON_TO_CHAR(ped, (int)secondaryWeapon, 50, false);
-                }
+                }*/
             }
             else if (model == RAGE.AtStringHash(SwatAndFbiPedsList[1]))
             {
                 // FBI
-				REMOVE_ALL_CHAR_WEAPONS(ped);
-                SET_CHAR_PROP_INDEX(ped, 0, (uint)Main.GenerateRandomNumber(0, 2));
-                var primaryWeapon = FbiWeaponList[Main.GenerateRandomNumber(0, FbiWeaponList.Length)];
-                var secondaryWeapon = Handguns[Main.GenerateRandomNumber(0, Handguns.Length)];
+               // REMOVE_ALL_CHAR_WEAPONS(ped);
+                SET_CHAR_PROP_INDEX(ped, 0, (uint)Helpers.GenerateRandomNumber(0, 2));
+              /*  var primaryWeapon = FbiWeaponList[Helpers.GenerateRandomNumber(0, FbiWeaponList.Length)];
+                var secondaryWeapon = Handguns[Helpers.GenerateRandomNumber(0, Handguns.Length)];
                 GIVE_WEAPON_TO_CHAR(ped, (int)primaryWeapon, 300, true);
-                GIVE_WEAPON_TO_CHAR(ped, (int)secondaryWeapon, 50, false);
+                GIVE_WEAPON_TO_CHAR(ped, (int)secondaryWeapon, 50, false);*/
             }
             else if (model == RAGE.AtStringHash(ArmouredPedsList[0]))
             {
                 // Armoured
-				REMOVE_ALL_CHAR_WEAPONS(ped);
-                SET_CHAR_PROP_INDEX(ped, 0, (uint)Main.GenerateRandomNumber(0, 1));
-                var primaryWeapon = ArmouredWeaponList[Main.GenerateRandomNumber(0, ArmouredWeaponList.Length)];
-                var secondaryWeapon = Handguns[Main.GenerateRandomNumber(0, Handguns.Length)];
+                REMOVE_ALL_CHAR_WEAPONS(ped);
+                SET_CHAR_PROP_INDEX(ped, 0, (uint)Helpers.GenerateRandomNumber(0, 1));
+                var primaryWeapon = ArmouredWeaponList[Helpers.GenerateRandomNumber(0, ArmouredWeaponList.Length)];
+                var secondaryWeapon = Handguns[Helpers.GenerateRandomNumber(0, Handguns.Length)];
                 GIVE_WEAPON_TO_CHAR(ped, (int)primaryWeapon, 300, true);
                 GIVE_WEAPON_TO_CHAR(ped, (int)secondaryWeapon, 50, false);
             }

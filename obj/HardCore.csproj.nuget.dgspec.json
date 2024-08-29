@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\HardcoreIV\\HardCore.csproj": {}
+    "D:\\Hardcore-IV\\HardCore.csproj": {}
   },
   "projects": {
-    "E:\\HardcoreIV\\HardCore.csproj": {
+    "D:\\Hardcore-IV\\HardCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\HardcoreIV\\HardCore.csproj",
+        "projectUniqueName": "D:\\Hardcore-IV\\HardCore.csproj",
         "projectName": "HardCore.ivsdk",
-        "projectPath": "E:\\HardcoreIV\\HardCore.csproj",
-        "packagesPath": "C:\\Users\\Sarthak\\.nuget\\packages\\",
-        "outputPath": "E:\\HardcoreIV\\obj\\",
+        "projectPath": "D:\\Hardcore-IV\\HardCore.csproj",
+        "packagesPath": "C:\\Users\\ACER ALG\\.nuget\\packages\\",
+        "outputPath": "D:\\Hardcore-IV\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "E:\\Apps\\Microsoft\\Visual Studio 2022\\SDKs\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Sarthak\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ACER ALG\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -48,7 +44,7 @@
       "frameworks": {
         "net48": {
           "targetAlias": "net48",
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

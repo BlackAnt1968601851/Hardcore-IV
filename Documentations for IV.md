@@ -30,4 +30,39 @@ anyways according to my findings- TASK_HELI_MISSION does these stuffs at specifi
 #### task_vehicle_mission- there are flags too 
 will research about this later.
 
-will
+##
+
+
+
+WeaponSlots - CombatTweaks.cs
+ //Set of Weapons for them.
+        private static eWeaponType[] SwatWeaponList = {
+            eWeaponType.WEAPON_M4,
+            eWeaponType.WEAPON_MP5,
+            eWeaponType.WEAPON_MICRO_UZI,
+            eWeaponType.WEAPON_SHOTGUN,
+            eWeaponType.WEAPON_BARETTA,
+            eWeaponType.WEAPON_SNIPERRIFLE
+        };
+
+        private static eWeaponType[] FbiWeaponList = {
+            eWeaponType.WEAPON_M4,
+            eWeaponType.WEAPON_MP5,
+            eWeaponType.WEAPON_BARETTA,
+            eWeaponType.WEAPON_SHOTGUN
+        };
+
+        private static eWeaponType[] ArmouredWeaponList = {
+            eWeaponType.WEAPON_AK47,
+            eWeaponType.WEAPON_M4,
+            eWeaponType.WEAPON_MP5,
+            eWeaponType.WEAPON_MICRO_UZI
+        };
+
+        private static eWeaponType[] Handguns = {
+            eWeaponType.WEAPON_DEAGLE,
+            eWeaponType.WEAPON_PISTOL
+        };
+
+
+
