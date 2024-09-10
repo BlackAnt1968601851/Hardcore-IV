@@ -13,10 +13,36 @@
   <PropertyGroup />
   <ItemGroup>
     <Reference Include="ClonksCodingLib.GTAIV">
-      <HintPath>..\Games\Grand Theft Auto IV - The Complete Edition\GTAIV\IVSDKDotNet\bin\ClonksCodingLib.GTAIV.dll</HintPath>
+      <HintPath>ClonksCodingLib.GTAIV.dll</HintPath>
     </Reference>
     <Reference Include="IVSDKDotNetWrapper">
-      <HintPath>..\Games\Grand Theft Auto IV - The Complete Edition\GTAIV\IVSDKDotNetWrapper.dll</HintPath>
+      <HintPath>IVSDKDotNetWrapper.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="ClonksCodingLib.GTAIV.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ClonksCodingLib.GTAIV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IVSDKDotNetWrapper.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IVSDKDotNetWrapper.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Redistributables\ClonksCodingLib.GTAIV.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Redistributables\ClonksCodingLib.GTAIV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Redistributables\IVSDKDotNetWrapper.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Redistributables\IVSDKDotNetWrapper.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
